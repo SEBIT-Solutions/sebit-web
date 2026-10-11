@@ -30,7 +30,7 @@ All copy is in **Czech**. All public URLs hang off `sebit.cz`.
 
 ### Sources consulted
 
-- **GitHub repo:** [`VolPark/SEBIT.github.io`](https://github.com/VolPark/SEBIT.github.io) (branch `main`) — full static site, imported into `source/`.
+- **GitHub repo:** [`SEBIT-Solutions/sebit-web`](https://github.com/SEBIT-Solutions/sebit-web) (branch `main`) — full static site, imported into `source/`.
 - **Brand guidelines:** `source/brand_guidelines.md` — logo, palette, typography rules.
 - **Live site:** `https://www.sebit.cz/`
 - **Logo SVGs:** `assets/sebit_{division}_{light,dark}.svg` + `assets/favicon_arrow.svg`.

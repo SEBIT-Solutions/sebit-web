@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 // Old URLs keep working: Astro writes a meta-refresh + canonical page for each
 // redirect (GitHub Pages cannot send HTTP 301).
 export default defineConfig({
-  site: 'https://www.sebit.cz',
+  site: 'https://sebit.cz', // must match public/CNAME (www redirects to the apex)
   trailingSlash: 'always',
   build: { format: 'directory' },
   redirects: {

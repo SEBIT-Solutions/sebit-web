@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /timeline/
+Disallow: /jira/
+
+Sitemap: https://www.sebit.cz/sitemap.xml

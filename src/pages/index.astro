@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import HeroReport from '../components/HeroReport.astro';
+import QuestionPicker from '../components/QuestionPicker.astro';
+import CapabilityGrid from '../components/CapabilityGrid.astro';
+import CaseCards from '../components/CaseCards.astro';
+import Partner from '../components/Partner.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Models from '../components/Models.astro';
+import { sectors, roles } from '../data/site';
+---
+<Base bare title="SEBIT Solutions — informace pro rozhodování, data, integrace, AI a IT outsourcing"
+  description="Zpřístupníme data z ERP, účetnictví a skladu a uděláme z nich přehledy pro vedení, provoz a finance. Power BI a Microsoft Fabric, integrace, AI, weby a IT outsourcing.">
+
+  <section class="w-hero w-ground-navy-strong w-on-navy" aria-labelledby="h-home">
+    <div class="w-wrap">
+      <div class="w-hero__grid">
+        <div class="w-hero__copy">
+          <Eyebrow>Reporting · Data · Integrace · AI · Weby · IT outsourcing</Eyebrow>
+          <h1 class="w-display" id="h-home">Informace, podle kterých se dá řídit. <span>Pro provoz i finance.</span></h1>
+          <p class="w-lead">Zpřístupníme data z ERP, účetnictví, skladu a dalších systémů a uděláme z nich přehledy, podle kterých vedení, operativa a finance rozhodují — v Power BI a Microsoft Fabric. Přidáme integrace, AI nadstavby a weby. A když potřebujete posílit tým, dodáme IT specialisty.</p>
+          <div class="w-hero__actions">
+            <a class="kit-btn kit-btn--on-navy kit-btn--lg" href="/kontakt/">Probrat projekt <Icon name="i-arrow-right" /></a>
+            <a class="kit-btn kit-btn--on-navy kit-btn--ghost kit-btn--lg" href="/co-delame/reporting-a-data/">Jak to funguje</a>
+          </div>
+        </div>
+        <HeroReport />
+      </div>
+      <dl class="w-hero__proof">
+        <div class="w-stat"><dt class="w-stat__l">oblastí od dat po weby a IT kapacity</dt><dd class="w-stat__n">6</dd></div>
+        <div class="w-stat"><dt class="w-stat__l">rolí v katalogu IT specialistů</dt><dd class="w-stat__n">{roles.length}</dd></div>
+        <div class="w-stat"><dt class="w-stat__l">nejdéle trvá reakce na kritický požadavek</dt><dd class="w-stat__n">4 h</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="w-section--tight w-ground-page" aria-labelledby="h-clients">
+    <div class="w-wrap w-logobar">
+      <p class="w-small" id="h-clients"><b class="w-strong">Pracujeme pro firmy z oborů</b><br />jména uvádíme se souhlasem klientů</p>
+      <ul class="w-clients">
+        {sectors.map((c) => <li class="w-client w-client--sector"><b>{c}</b></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" aria-labelledby="h-q" style="padding-top:var(--sb-size-8)">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div>
+          <Eyebrow>Informace pro rozhodování</Eyebrow>
+          <h2 class="w-h2" id="h-q">Na jaké otázky dostanete odpověď do rána. Vyzkoušejte si to.</h2>
+        </div>
+        <p class="w-body">Klikněte na otázku a report vedle se překreslí. Data už máte v ERP, účetnictví, skladu a tabulkách — my je propojíme a dáme každému, kdo rozhoduje, přehled, kterému se dá věřit.</p>
+      </div>
+      <QuestionPicker />
+      <div style="margin-top:var(--sb-size-8)"><a class="w-link" href="/co-delame/reporting-a-data/">Jak stavíme datovou platformu a reporting <Icon name="i-arrow-right" /></a></div>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-surface" aria-labelledby="h-caps">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div>
+          <Eyebrow>Co děláme</Eyebrow>
+          <h2 class="w-h2" id="h-caps">Šest oblastí. Od dat po lidi do vašeho týmu.</h2>
+        </div>
+        <p class="w-body">Každou oblast dodáme samostatně, nebo jako celek. Vždy s lidmi, kteří ji umí navrhnout, postavit i provozovat.</p>
+      </div>
+      <CapabilityGrid />
+    </div>
+  </section>
+
+  <section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-flow">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div>
+          <Eyebrow signet={false}>Jak to do sebe zapadá</Eyebrow>
+          <h2 class="w-h2" id="h-flow">Od zdrojového systému k rozhodnutí. Začít můžete kdekoli.</h2>
+        </div>
+        <p class="w-body w-on-navy-muted">Většina firem nepotřebuje další nástroj, ale propojit ty, které už má. Tohle je řetězec, který umíme dodat celý.</p>
+      </div>
+      <div class="w-flow">
+        <div class="w-flow__col"><h3><span>01</span>Zdroje</h3><ul><li>ERP a účetnictví</li><li>CRM a obchod</li><li>E-shop a sklad</li><li>Základní registry státu<small>ROB, ROS, RPP, RÚIAN</small></li></ul></div>
+        <div class="w-flow__col"><h3><span>02</span>Integrace</h3><ul><li>SEBIT Gateway (SEGW)<small>API gateway, datahub, monitoring</small></li><li>Napojení na ERP</li><li>REST a OData API</li><li>REST vrstva nad Oracle Forms</li></ul></div>
+        <div class="w-flow__col w-flow__col--key"><h3><span>03</span>Data</h3><ul><li>Microsoft Fabric<small>OneLake, Lakehouse, Warehouse</small></li><li>Datové pipeline</li><li>Sémantický model</li></ul></div>
+        <div class="w-flow__col"><h3><span>04</span>Rozhodnutí</h3><ul><li>Přehledy pro vedení a finance<small>Power BI</small></li><li>Operativní reporting</li><li>AI dotazy nad daty</li><li>Weby, portály a aplikace</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" aria-labelledby="h-models">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div>
+          <Eyebrow>Kapacitní outsourcing IT</Eyebrow>
+          <h2 class="w-h2" id="h-models">Potřebujete posílit tým? Vy rozhodnete, kdo řídí práci a kdo nese riziko.</h2>
+        </div>
+        <p class="w-body">Stejní lidé, tři smluvní rámce. Vyberte, co potřebujete vyřešit — ukážeme, který model sedí nejlépe.</p>
+      </div>
+      <Models />
+    </div>
+  </section>
+
+  <section class="w-section w-ground-surface" aria-labelledby="h-steps">
+    <div class="w-wrap">
+      <div class="w-head">
+        <Eyebrow>Jak začínáme</Eyebrow>
+        <h2 class="w-h2" id="h-steps">Od prvního hovoru k prvnímu výsledku.</h2>
+      </div>
+      <ol class="w-steps">
+        <li class="w-step"><span class="w-step__n">01</span><div class="w-step__t"><span class="w-step__when">Den 1</span><h3 class="w-h4">Úvodní hovor</h3><p class="w-small">30 minut. Projdeme cíl, systémy, data, tým a termín. Bez závazku.</p></div></li>
+        <li class="w-step"><span class="w-step__n">02</span><div class="w-step__t"><span class="w-step__when">Do 2 pracovních dnů</span><h3 class="w-h4">Návrh řešení nebo lidí</h3><p class="w-small">Architektura a odhad pracnosti, nebo profily prověřených specialistů.</p></div></li>
+        <li class="w-step"><span class="w-step__n">03</span><div class="w-step__t"><span class="w-step__when">Podle vás</span><h3 class="w-h4">Audit, prototyp nebo pohovor</h3><p class="w-small">Malý ověřitelný krok, než se zavážete k velkému.</p></div></li>
+        <li class="w-step"><span class="w-step__n">04</span><div class="w-step__t"><span class="w-step__when">Dodávka</span><h3 class="w-h4">Práce a reporting</h3><p class="w-small">Výkazy v reálném čase, pravidelné demo, jeden kontakt na naší straně.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-why">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div>
+          <Eyebrow signet={false}>Manifest spolupracovníka</Eyebrow>
+          <h2 class="w-h2" id="h-why">Sedm pravidel, podle kterých nás můžete měřit.</h2>
+        </div>
+        <a class="w-link" href="/o-nas/#manifest">Celý manifest <Icon name="i-arrow-right" /></a>
+      </div>
+      <ol class="w-principles">
+        <li class="w-principle"><span class="w-principle__n">02 / 07</span><h3 class="w-h3">Otevřená komunikace</h3><p>Jsme plně transparentní ke klientům i sami k sobě. Důvěra a otevřenost jsou základem naší spolupráce.</p></li>
+        <li class="w-principle"><span class="w-principle__n">04 / 07</span><h3 class="w-h3">Konstruktivní upřímnost</h3><p>Nic nezatajujeme. Když vidíme chybu, taktně ji pojmenujeme, vysvětlíme souvislosti a navrhneme řešení.</p></li>
+        <li class="w-principle"><span class="w-principle__n">05 / 07</span><h3 class="w-h3">Partnerství a proaktivita</h3><p>Nejsme jen dodavatelé. Přemýšlíme nad vaším projektem a navrhujeme vylepšení, která mají skutečnou hodnotu.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" aria-labelledby="h-ref">
+    <div class="w-wrap w-stack-lg">
+      <div class="w-head w-head--row" style="margin-bottom:0">
+        <div>
+          <Eyebrow>Reference</Eyebrow>
+          <h2 class="w-h2" id="h-ref">Co jsme dodali firmám z dopravy, plynárenství, obchodu i IT.</h2>
+        </div>
+        <a class="w-link" href="/reference/">Všechny reference <Icon name="i-arrow-right" /></a>
+      </div>
+      <CaseCards />
+      <Partner />
+    </div>
+  </section>
+
+  <section class="w-section w-ground-navy-strong w-on-navy" aria-labelledby="h-eco">
+    <div class="w-wrap">
+      <div class="w-head">
+        <Eyebrow signet={false}>SEBIT Group</Eyebrow>
+        <h2 class="w-h2" id="h-eco">Za námi stojí laboratoř a vlastní akademie.</h2>
+        <p class="w-lead">Proto víme, kde brát lidi, a nové technologie zkoušíme dřív, než je nasadíme u vás.</p>
+      </div>
+      <div class="w-eco">
+        <a class="w-eco__i" href="/co-delame/ai/"><img src="/assets/logos/sebit_labs_dark.svg" alt="SEBIT Labs" width="128" height="44" /><p>Prototypy a proof of concept za týdny. AI a LLM v podnikových procesech, cloud-native, IoT.</p></a>
+        <a class="w-eco__i" href="/kariera/"><img src="/assets/logos/sebit_academy_dark.svg" alt="SEBIT Academy" width="128" height="44" /><p>Placené stáže, kurzy a junior talent pipeline. Lidé, které známe dřív, než nastoupí k vám.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CaseCards from '../components/CaseCards.astro';
+import Partner from '../components/Partner.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base title="Reference a případové studie" description="Co jsme dodali firmám z autodopravy a logistiky, dodávek LPG, prodeje spojek pro vodu a plyn a IT konzultací — a s integrátorem Business Central.">
+  <PageHero crumbs={[{ label: 'Reference' }]} title="Doprava, plynárenství, obchod, IT. Co jsme skutečně dodali."
+    lead="Jména klientů uvádíme jen s jejich souhlasem, proto zatím popisujeme obor a konkrétní práci. Rádi vás s klientem propojíme osobně." />
+  <section class="w-section w-ground-surface" aria-label="Případové studie">
+    <div class="w-wrap w-stack-lg">
+      <CaseCards />
+      <Partner />
+    </div>
+  </section>
+  <section class="w-section w-ground-page" aria-labelledby="h-quotes">
+    <div class="w-wrap">
+      <h2 class="w-h2" id="h-quotes" style="margin-bottom:var(--sb-size-8)">Co o nás říkají</h2>
+      <div class="w-grid w-grid--2">
+        <figure class="w-quote" style="margin:0"><Icon name="i-quote-left" sprite="dom" /><blockquote>„Rychle nám dodali zkušené vývojáře přesně na míru. Komunikace byla transparentní a výkazy vždy přesné.“</blockquote><figcaption><b>IT manažer</b><span class="w-small">fintech, Praha</span></figcaption></figure>
+        <figure class="w-quote" style="margin:0"><Icon name="i-quote-left" sprite="dom" /><blockquote>„Migrace z Oracle Forms proběhla bez výpadku provozu. Dodali přesně to, co slíbili.“</blockquote><figcaption><b>CTO</b><span class="w-small">pojišťovna, Brno</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

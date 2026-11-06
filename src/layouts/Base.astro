@@ -1,0 +1,187 @@
+---
+import '../styles/ds/tokens.css';
+import '../styles/ds/bundle.css';
+import '../styles/ds/button_kit.css';
+import '../styles/ds/icon_kit.css';
+import '../styles/web.css';
+import Icon from '../components/Icon.astro';
+import { company } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Full title without the „| SEBIT Solutions“ suffix (home page). */
+  bare?: boolean;
+  /** Hide the sticky mobile CTA (contact page). */
+  noStickyCta?: boolean;
+  noindex?: boolean;
+}
+const { title, description, bare = false, noStickyCta = false, noindex = false } = Astro.props;
+const fullTitle = bare ? title : `${title} | SEBIT Solutions`;
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
+
+const nav = [
+  { href: '/co-delame/', label: 'Co děláme' },
+  { href: '/co-delame/reporting-a-data/', label: 'Reporting a data' },
+  { href: '/co-delame/ai/', label: 'AI' },
+  { href: '/it-outsourcing/', label: 'IT outsourcing' },
+  { href: '/reference/', label: 'Reference' },
+  { href: '/o-nas/', label: 'O nás' },
+  { href: '/kariera/', label: 'Kariéra' },
+];
+// the most specific nav item that matches the current path is the current page
+const current = nav.filter((n) => path.startsWith(n.href)).sort((a, b) => b.href.length - a.href.length)[0]?.href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'SEBIT Solutions s.r.o.',
+  url: company.url,
+  logo: new URL('/assets/logos/sebit_solutions_light.svg', Astro.site).href,
+  email: company.email,
+  telephone: company.phone,
+  vatID: company.dic,
+  taxID: company.ico,
+  address: { '@type': 'PostalAddress', streetAddress: company.street, postalCode: '276 01', addressLocality: 'Mělník', addressCountry: 'CZ' },
+  foundingDate: company.founded,
+  founder: [{ '@type': 'Person', name: 'Ing. Vojtěch Šebek' }, { '@type': 'Person', name: 'Ing. Petra Šebková Horynová' }],
+  sameAs: [company.linkedin],
+  knowsAbout: ['Power BI', 'Microsoft Fabric', 'Datová integrace', 'AI', 'Vývoj webů', 'IT outsourcing', 'Základní registry', 'Oracle Forms'],
+};
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon_rounded.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta property="og:site_name" content="SEBIT Solutions" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body>
+  <a class="w-skip" href="#obsah">Přejít k obsahu</a>
+
+  <header class="w-header">
+    <div class="w-wrap">
+      <a class="w-logo" href="/" aria-label="SEBIT Solutions, úvodní stránka">
+        <img class="w-logo--light" src="/assets/logos/sebit_solutions_light.svg" alt="SEBIT Solutions" width="140" height="48" />
+      </a>
+      <nav class="w-nav" aria-label="Hlavní navigace">
+        <ul>
+          {nav.map((n) => <li><a href={n.href} aria-current={n.href === current ? 'page' : undefined}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+      <a class="kit-btn kit-btn--primary w-header__cta" href="/kontakt/">Probrat projekt</a>
+      <button class="w-menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Otevřít menu">
+        <svg class="sb-i" aria-hidden="true"><use href="/assets/icons/_sebit-ui-icons.svg#i-menu" /></svg>
+      </button>
+    </div>
+    <div class="w-mobile-nav" id="mnav" hidden>
+      <div class="w-wrap">
+        <ul>
+          {nav.map((n) => <li><a href={n.href} aria-current={n.href === current ? 'page' : undefined}>{n.label} <Icon name="i-arrow-right" /></a></li>)}
+          <li><a href="/kontakt/">Kontakt <Icon name="i-arrow-right" /></a></li>
+        </ul>
+        <a class="kit-btn kit-btn--primary kit-btn--lg" href="/kontakt/">Probrat projekt</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="obsah" tabindex="-1">
+    <slot />
+  </main>
+
+  <footer class="w-footer w-on-navy">
+    <div class="w-wrap">
+      <div class="w-footer__top">
+        <div class="w-footer__brand">
+          <img src="/assets/logos/sebit_solutions_dark.svg" alt="SEBIT Solutions" width="151" height="52" />
+          <p>Informace pro rozhodování provozu a financí, zpřístupněná data, integrace, AI, weby a kapacitní outsourcing IT.</p>
+          <div class="w-row">
+            <a class="w-social" href={company.linkedin} rel="noopener" aria-label="SEBIT Solutions na LinkedIn">in</a>
+            <span class="w-small">{company.email} · {company.phone}</span>
+          </div>
+        </div>
+        <div class="w-footer__cols">
+          <div><h2>Co děláme</h2><ul>
+            <li><a href="/co-delame/reporting-a-data/">Reporting a data</a></li>
+            <li><a href="/co-delame/ai/">AI nadstavby</a></li>
+            <li><a href="/co-delame/integrace/">Integrace a SEBIT Gateway</a></li>
+            <li><a href="/co-delame/weby-a-aplikace/">Weby a aplikace</a></li>
+            <li><a href="/co-delame/modernizace-oracle-forms/">Modernizace Oracle Forms</a></li>
+            <li><a href="/co-delame/integrace/zakladni-registry/">Základní registry</a></li>
+          </ul></div>
+          <div><h2>IT outsourcing</h2><ul>
+            <li><a href="/it-outsourcing/">Modely spolupráce</a></li>
+            <li><a href="/it-outsourcing/#katalog">Katalog rolí</a></li>
+          </ul></div>
+          <div><h2>Společnost</h2><ul>
+            <li><a href="/o-nas/">O nás</a></li>
+            <li><a href="/o-nas/#manifest">Manifest</a></li>
+            <li><a href="/reference/">Reference</a></li>
+            <li><a href="/kariera/">Kariéra a Academy</a></li>
+          </ul></div>
+          <div><h2>Kontakt</h2><ul>
+            <li><a href="/kontakt/">Poptávka</a></li>
+            <li><a href="/ochrana-osobnich-udaju/">Ochrana osobních údajů</a></li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="w-footer__legal">
+        <span>© {year} SEBIT Solutions s.r.o. Všechna práva vyhrazena.</span>
+        <span>{company.name} · {company.street}, {company.city} · IČO {company.ico} · DIČ {company.dic} · {company.register}</span>
+      </div>
+    </div>
+  </footer>
+
+  {!noStickyCta && (
+    <div class="w-sticky-cta" id="sticky-cta" aria-hidden="true"><a class="kit-btn kit-btn--primary kit-btn--lg" href="/kontakt/" tabindex="-1">Probrat projekt</a></div>
+  )}
+
+  <script>
+    const btn = document.querySelector<HTMLButtonElement>('.w-menu-btn');
+    const mnav = document.getElementById('mnav');
+    const UI = '/assets/icons/_sebit-ui-icons.svg#';
+    function setMenu(open: boolean) {
+      if (!btn || !mnav) return;
+      mnav.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+      btn.querySelector('use')?.setAttribute('href', UI + (open ? 'i-close' : 'i-menu'));
+    }
+    btn?.addEventListener('click', () => setMenu(!!mnav?.hidden));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mnav && !mnav.hidden) { setMenu(false); btn?.focus(); } });
+
+    // sticky mobile CTA after 400 px (brand §12.1)
+    const sticky = document.getElementById('sticky-cta');
+    if (sticky) {
+      const link = sticky.querySelector('a');
+      const onScroll = () => {
+        const show = window.scrollY > 400;
+        sticky.classList.toggle('is-on', show);
+        sticky.setAttribute('aria-hidden', String(!show));
+        if (link) link.tabIndex = show ? 0 : -1;
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+  </script>
+</body>
+</html>

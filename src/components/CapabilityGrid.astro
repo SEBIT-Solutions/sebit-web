@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+import { capabilities } from '../data/site';
+interface Props { headingLevel?: 'h2' | 'h3' }
+const { headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+---
+<div class="w-caps">
+  {capabilities.map((c) => (
+    <a class="w-cap" href={c.href}>
+      <div class="w-cap__top"><span class="w-cap__ic"><Icon name={c.icon} sprite="dom" /></span></div>
+      <H class="w-h3">{c.name}</H>
+      <p>{c.short}</p>
+      <ul class="w-tags">{c.tags.map((t) => <li>{t}</li>)}</ul>
+      <span class="w-cap__go">Detail <Icon name="i-arrow-right" /></span>
+    </a>
+  ))}
+</div>

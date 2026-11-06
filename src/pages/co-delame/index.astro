@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CapabilityGrid from '../../components/CapabilityGrid.astro';
+import CtaBand from '../../components/CtaBand.astro';
+---
+<Base title="Co děláme" description="Reporting a data v Power BI a Microsoft Fabric, AI nadstavby, integrace a SEBIT Gateway, weby a aplikace, modernizace Oracle Forms a IT outsourcing.">
+  <PageHero crumbs={[{ label: 'Co děláme' }]} title="Šest oblastí, ve kterých jsme doma."
+    lead="Od informací pro rozhodování přes integrace a AI až po weby. A když potřebujete posílit tým, dodáme IT specialisty." />
+  <section class="w-section w-ground-surface" style="padding-top:var(--sb-size-12)" aria-label="Oblasti">
+    <div class="w-wrap"><CapabilityGrid headingLevel="h2" /></div>
+  </section>
+  <CtaBand />
+</Base>

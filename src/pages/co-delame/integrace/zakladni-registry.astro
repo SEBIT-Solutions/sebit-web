@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+const regs = [['ROB', 'Registr obyvatel'], ['ROS', 'Registr osob'], ['RPP', 'Registr práv a povinností'], ['RÚIAN', 'Registr územní identifikace, adres a nemovitostí']];
+---
+<Base title="Napojení na základní registry (ROB, ROS, RPP, RÚIAN)" description="Integrace na základní registry státu: iniciální ztotožnění klientského portfolia a průběžná aktualizace údajů.">
+  <section class="w-hero w-ground-navy-strong w-on-navy" aria-labelledby="h-registry">
+    <div class="w-wrap">
+      <div class="w-hero__grid">
+        <div class="w-hero__copy">
+          <nav aria-label="Drobečková navigace"><ol class="w-crumbs w-crumbs--inverse"><li><a href="/">Domů</a></li><li><a href="/co-delame/integrace/">Integrace</a></li><li aria-current="page">Základní registry</li></ol></nav>
+          <h1 class="w-h1" id="h-registry">Napojení na základní registry. Od ztotožnění po automatické aktualizace.</h1>
+          <p class="w-lead">Připravíme kompletní integraci vašich systémů na základní registry státu, včetně iniciálního ztotožnění klientského portfolia a průběžné aktualizace údajů.</p>
+          <div class="w-hero__actions"><a class="kit-btn kit-btn--on-navy kit-btn--lg" href="/kontakt/?need=registry">Konzultovat napojení</a></div>
+        </div>
+        <div class="w-reg">{regs.map(([k, v]) => <div class="w-reg__t"><b>{k}</b><span>{v}</span></div>)}</div>
+      </div>
+    </div>
+  </section>
+  <section class="w-section w-ground-page" aria-labelledby="h-reg-steps">
+    <div class="w-wrap">
+      <div class="w-head"><h2 class="w-h2" id="h-reg-steps">Jak napojení probíhá</h2></div>
+      <ol class="w-steps">
+        <li class="w-step"><span class="w-step__n">01</span><div class="w-step__t"><h3 class="w-h4">Právní a technická analýza</h3><p class="w-small">Ověříme oprávnění k přístupu a rozsah údajů, které smíte zpracovávat.</p></div></li>
+        <li class="w-step"><span class="w-step__n">02</span><div class="w-step__t"><h3 class="w-h4">Iniciální ztotožnění</h3><p class="w-small">Spárujeme stávající klientské portfolio s referenčními údaji registrů.</p></div></li>
+        <li class="w-step"><span class="w-step__n">03</span><div class="w-step__t"><h3 class="w-h4">Průběžné aktualizace</h3><p class="w-small">Změny v registrech se do vašich systémů propisují automaticky.</p></div></li>
+        <li class="w-step"><span class="w-step__n">04</span><div class="w-step__t"><h3 class="w-h4">Provoz a podpora</h3><p class="w-small">Monitoring, reporting chyb ztotožnění a podpora při změnách rozhraní podle dohodnutého SLA.</p></div></li>
+      </ol>
+    </div>
+  </section>
+  <section class="w-section w-ground-surface" aria-labelledby="h-faq-r">
+    <div class="w-wrap w-split">
+      <div class="w-stack w-sticky"><h2 class="w-h2" id="h-faq-r">Co jsou základní registry</h2><p class="w-body">Krátce a srozumitelně pro ty, kdo o napojení teprve rozhodují.</p></div>
+      <div class="w-faq">
+        <details open><summary>Co to je? <Icon name="i-chevron-down" /></summary><div><p>Základní registry státu (ROB, ROS, RPP, RÚIAN) jsou centrální evidence obyvatel, osob, práv a povinností a územní identifikace. Zajišťují jednotné a ověřené údaje napříč veřejnou správou.</p></div></details>
+        <details><summary>Jak fungují? <Icon name="i-chevron-down" /></summary><div><p>Údaje z registrů sdílejí úřady mezi sebou, takže občan nemusí stále dokládat stejné informace. Aktualizace probíhá automaticky, a proto jsou údaje přesné.</p></div></details>
+        <details><summary>Kdo je může integrovat? <Icon name="i-chevron-down" /></summary><div><p>Jen oprávněné subjekty, které splňují zákonné podmínky a mají povolení od správců registrů. Pro soukromý sektor je integrace možná pouze ve specifických případech daných zákonem — oprávnění ověříme v první fázi projektu.</p></div></details>
+      </div>
+    </div>
+  </section>
+  <CtaBand cta="Konzultovat napojení" href="/kontakt/?need=registry" />
+</Base>

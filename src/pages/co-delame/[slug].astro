@@ -1,0 +1,74 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { details, type Detail } from '../../data/site';
+
+export function getStaticPaths() {
+  return details.map((d) => ({ params: { slug: d.slug }, props: { d } }));
+}
+const { d } = Astro.props as { d: Detail };
+const contact = `/kontakt/?need=${d.need}`;
+---
+<Base title={d.title} description={d.description}>
+  <PageHero crumbs={[{ href: '/co-delame/', label: 'Co děláme' }, { label: d.name }]} title={d.h1} lead={d.lead}>
+    <div class="w-hero__actions">
+      <a class="kit-btn kit-btn--primary kit-btn--lg" href={contact}>{d.cta}</a>
+      <a class="kit-btn kit-btn--ghost kit-btn--lg" href="/reference/">Reference</a>
+    </div>
+  </PageHero>
+
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-deliver">
+    <div class="w-wrap w-stack-lg">
+      <div class="w-head" style="margin-bottom:0"><h2 class="w-h2" id="h-deliver">Co dodáváme</h2></div>
+      <ul class="w-deliver">
+        {d.deliver.map((x) => (
+          <li><Icon name="i-check-circle" /><div><b>{x.href ? <a class="w-link w-link--bare" href={x.href}>{x.t}</a> : x.t}</b><span>{x.d}</span></div></li>
+        ))}
+      </ul>
+      {d.own && (
+        <div class="w-feature w-feature--navy w-on-navy">
+          <div class="w-stack">
+            <Eyebrow signet={false}>Vlastní platforma</Eyebrow>
+            <h2 class="w-h2">{d.own.t}</h2>
+            <p class="w-body">{d.own.d}</p>
+          </div>
+          <div class="w-stack">
+            <ul class="w-segw">
+              {d.own.features.map((f) => (
+                <li><span class="w-segw__ic"><Icon name={f.icon} sprite="dom" /></span><div><b>{f.t}</b><span>{f.d}</span></div></li>
+              ))}
+            </ul>
+            <dl class="w-facts">{d.own.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+          </div>
+        </div>
+      )}
+      <div class="w-stack" style="gap:var(--sb-size-3)">
+        <h2 class="w-h4">Technologie</h2>
+        <ul class="w-tags">{d.stack.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-surface" aria-labelledby="h-projects">
+    <div class="w-wrap w-stack-lg">
+      <div class="w-head" style="margin-bottom:0"><h2 class="w-h2" id="h-projects">Typické projekty</h2></div>
+      <div class="w-projects">
+        {d.projects.map((p) => <div class="w-project"><h3 class="w-h4">{p.t}</h3><p>{p.d}</p></div>)}
+      </div>
+      {d.reference && <p class="w-ref"><b>Z praxe:</b> {d.reference} <a class="w-link" href="/reference/">Reference <Icon name="i-arrow-right" /></a></p>}
+      <div class="w-offer w-on-navy">
+        <div class="w-stack" style="gap:var(--sb-size-2)">
+          <Eyebrow signet={false}>První krok</Eyebrow>
+          <h2 class="w-h3">{d.offer.t}</h2>
+          <p>{d.offer.d} Pevný rozsah a cenu znáte předem.</p>
+        </div>
+        <a class="kit-btn kit-btn--on-navy kit-btn--lg" href={contact}>{d.cta}</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand cta={d.cta} href={contact} />
+</Base>

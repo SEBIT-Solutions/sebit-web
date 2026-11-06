@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+import { company, sla } from '../data/site';
+interface Props { lead?: string; cta?: string; href?: string }
+const { lead = 'Popište nám, co potřebujete vědět, propojit nebo obsadit.', cta = 'Probrat projekt', href = '/kontakt/' } = Astro.props;
+---
+<section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-cta">
+  <div class="w-wrap w-cta">
+    <div class="w-stack">
+      <h2 class="w-h1" id="h-cta">Začněme spolupráci.</h2>
+      <p class="w-lead">{lead} Ozveme se {sla.standard}, s kritickým požadavkem {sla.critical} — v praxi obvykle dřív.</p>
+      <p class="w-cta__contact"><span><b>{company.email}</b></span><span><b>{company.phone}</b></span><span>Rádi vám pomůžeme!</span></p>
+    </div>
+    <a class="kit-btn kit-btn--lime kit-btn--lg" href={href}>{cta} <Icon name="i-arrow-right" /></a>
+  </div>
+</section>

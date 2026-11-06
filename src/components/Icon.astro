@@ -1,0 +1,7 @@
+---
+// SEBIT sprite icon (DECISIONS #10). sprite="ui" → core UI glyphs, "dom" → domain glyphs.
+interface Props { name: string; sprite?: 'ui' | 'dom'; class?: string }
+const { name, sprite = 'ui', class: cls } = Astro.props;
+const file = sprite === 'ui' ? '_sebit-ui-icons.svg' : '_sebit-icons.svg';
+---
+<svg class:list={['sb-i', cls]} aria-hidden="true"><use href={`/assets/icons/${file}#${name}`} /></svg>

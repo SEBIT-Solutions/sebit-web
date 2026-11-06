@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { company } from '../data/site';
+---
+<Base title="Zásady ochrany osobních údajů" description="Jak SEBIT Solutions s.r.o. zpracovává osobní údaje z poptávek a e-mailové komunikace. Web nepoužívá cookies.">
+  <PageHero crumbs={[{ label: 'Ochrana osobních údajů' }]} title="Zásady ochrany osobních údajů">
+    <p class="w-small">Platnost od 6. listopadu 2026 · Správce: {company.name}</p>
+  </PageHero>
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)">
+    <div class="w-wrap w-narrow w-prose">
+      <h2>1. Správce osobních údajů</h2>
+      <p>Správcem je společnost {company.name}, IČO {company.ico}, se sídlem {company.street}, {company.city}, {company.register}. Kontakt: {company.email}, {company.phone}.</p>
+      <h2>2. Jaké údaje zpracováváme</h2>
+      <p>Poptávkový formulář na tomto webu nic neodesílá na server. Po odeslání otevře váš e-mailový program s předvyplněnou zprávou. Zpracováváme proto jen údaje, které nám sami pošlete e-mailem nebo sdělíte telefonicky: jméno a příjmení, e-mail, firmu, telefon a obsah zprávy.</p>
+      <h2>3. Účel a právní základ</h2>
+      <p>Údaje zpracováváme za účelem vyřízení vaší poptávky a navazující komunikace. Právním základem je oprávněný zájem správce (čl. 6 odst. 1 písm. f) GDPR), případně jednání o smlouvě (čl. 6 odst. 1 písm. b) GDPR).</p>
+      <h2>4. Příjemci</h2>
+      <p>Údaje neprodáváme ani nepředáváme dalším správcům. E-mailovou komunikaci zajišťuje služba Microsoft 365 (Exchange Online) společnosti Microsoft Ireland Operations Limited, která údaje zpracovává jako náš zpracovatel podle smluvních podmínek Microsoftu pro ochranu dat.</p>
+      <h2>5. Doba uchování</h2>
+      <p>E-mailovou korespondenci uchováváme po dobu nezbytnou pro vyřízení poptávky, nejdéle 2 roky, pokud z ní nevznikne smluvní vztah.</p>
+      <h2>6. Vaše práva</h2>
+      <p>Máte právo na přístup k osobním údajům (čl. 15 GDPR), opravu (čl. 16), výmaz (čl. 17), omezení zpracování (čl. 18), přenositelnost (čl. 20) a vznést námitku (čl. 21). Žádosti posílejte na {company.email}. Máte také právo podat stížnost u Úřadu pro ochranu osobních údajů, Pplk. Sochora 27, 170 00 Praha 7, www.uoou.gov.cz.</p>
+      <h2>7. Cookies</h2>
+      <p>Tento web nepoužívá cookies ani analytické nástroje, které by ukládaly data do vašeho zařízení. Proto po vás nežádáme souhlas s cookies.</p>
+      <h2>8. Zabezpečení a změny</h2>
+      <p>Web běží výhradně přes HTTPS. Tyto zásady můžeme aktualizovat; datum platnosti je uvedeno v záhlaví.</p>
+    </div>
+  </section>
+</Base>

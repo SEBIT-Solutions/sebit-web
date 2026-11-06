@@ -2,14 +2,14 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
-import Ph from '../components/Ph.astro';
+import Person from '../components/Person.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Models from '../components/Models.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { roles, roleAreas } from '../data/site';
+import { roles, roleAreas, specialists } from '../data/site';
 const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] === a.area).length }));
 ---
-<Base title="IT outsourcing: specialisté, týmy a projekty na klíč" description="Kapacitní outsourcing IT ve třech modelech: IT specialista do týmu (T&M), tým na míru (team leasing) a projekt na klíč. Katalog 24 rolí.">
+<Base title="IT outsourcing: specialisté, týmy a projekty na klíč" description={`Kapacitní outsourcing IT ve třech modelech: IT specialista do týmu (T&M), tým na míru (team leasing) a projekt na klíč. Katalog ${roles.length} rolí.`}>
   <PageHero crumbs={[{ href: '/co-delame/', label: 'Co děláme' }, { label: 'IT outsourcing' }]}
     title="IT specialista, celý tým, nebo hotový projekt."
     lead="Kapacitní outsourcing ve třech modelech, se stejnými lidmi a stejnou kvalitou. Liší se tím, kdo řídí práci a kdo nese riziko dodávky." />
@@ -21,7 +21,27 @@ const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] ===
     </div>
   </section>
 
-  <section class="w-section w-ground-page" style="padding-top:0" aria-labelledby="h-compare">
+  <section class="w-section w-ground-surface" aria-labelledby="h-people">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div>
+          <Eyebrow>Lidé, které vám můžeme nabídnout</Eyebrow>
+          <h2 class="w-h2" id="h-people">Seniorní specialisté, se kterými můžete začít hned.</h2>
+        </div>
+        <p class="w-body">Kromě katalogu rolí vám rovnou představíme konkrétní lidi. Napište jim, nebo je poptejte přes formulář.</p>
+      </div>
+      <div class="w-people">
+        {specialists.map((p) => (
+          <div class="w-stack" style="gap:var(--sb-size-3)">
+            <Person name={p.name} role={p.role} email={p.email} />
+            <a class="kit-btn kit-btn--ghost kit-btn--sm" style="align-self:flex-start" href={`/kontakt/?need=outsourcing&role=${encodeURIComponent(`${p.catalog} (${p.name})`)}`}>Poptat</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" aria-labelledby="h-compare">
     <div class="w-wrap">
       <h2 class="w-h2" id="h-compare" style="margin-bottom:var(--sb-size-8)">Porovnání modelů</h2>
       <div class="w-table-wrap" tabindex="0" role="region" aria-labelledby="h-compare">
@@ -31,9 +51,10 @@ const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] ===
             <tr><th scope="row">Hodí se, když</th><td>Chybí vám konkrétní role nebo kapacita</td><td>Potřebujete celý tým, ale řízení chcete mít u sebe</td><td>Máte jasný rozsah a chcete garantovaný výsledek</td></tr>
             <tr><th scope="row">Řízení práce</th><td>Vaše</td><td>Vaše, s naším team leadem</td><td>Naše, včetně projektového řízení</td></tr>
             <tr><th scope="row">Riziko dodávky</th><td>Na vaší straně</td><td>Sdílené</td><td>Na naší straně, smluvní záruky</td></tr>
-            <tr><th scope="row">Cena</th><td>MD sazba <Ph>od X Kč</Ph></td><td>Měsíční cena týmu</td><td>Pevná cena po analýze</td></tr>
+            <tr><th scope="row">Cena</th><td>MD sazba podle seniority</td><td>Měsíční cena týmu</td><td>Pevná cena po analýze</td></tr>
             <tr><th scope="row">Výkazy</th><td>Průběžně, v reálném čase</td><td>Průběžně, v reálném čase</td><td>Report po milnících, výkazy na vyžádání</td></tr>
-            <tr><th scope="row">Minimální délka</th><td><Ph>X měsíců</Ph></td><td><Ph>X měsíců</Ph></td><td>Podle projektu</td></tr>
+            <tr><th scope="row">Délka spolupráce</th><td>Podle domluvy</td><td>Podle domluvy</td><td>Podle projektu</td></tr>
+            <tr><th scope="row">Nástup</th><td>Profily do 2 pracovních dnů</td><td>První profily do 2 pracovních dnů</td><td>Po schválení analýzy</td></tr>
           </tbody>
         </table>
       </div>
@@ -73,10 +94,10 @@ const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] ===
     <div class="w-wrap w-split">
       <div class="w-stack w-sticky"><h2 class="w-h2" id="h-faq-s">Časté otázky</h2><p class="w-body">Odpovědi, které od nás nákup a právní oddělení chtějí nejčastěji.</p></div>
       <div class="w-faq">
-        <details><summary>Jak rychle může specialista nastoupit? <Icon name="i-chevron-down" /></summary><div><p>Profily kandidátů posíláme obvykle <Ph>do X pracovních dnů</Ph>. Nástup závisí na výpovědní lhůtě a bezpečnostních prověrkách na vaší straně.</p></div></details>
-        <details><summary>Jak ověřujete senioritu kandidátů? <Icon name="i-chevron-down" /></summary><div><p>Každého kandidáta technicky prověří náš senior ze stejné oblasti. <Ph>popsat proces</Ph></p></div></details>
-        <details><summary>Co když specialista nebude sedět? <Icon name="i-chevron-down" /></summary><div><p>Zajistíme náhradu. <Ph>garance náhrady do X dnů</Ph></p></div></details>
-        <details><summary>Podepíšete NDA a doložíte podklady pro výběr dodavatele? <Icon name="i-chevron-down" /></summary><div><p>Ano. NDA podepisujeme před sdílením detailů projektu a jsme připraveni doložit podklady pro due diligence dodavatele. <Ph>doplnit: pojištění odpovědnosti, certifikace</Ph></p></div></details>
+        <details><summary>Jak rychle může specialista nastoupit? <Icon name="i-chevron-down" /></summary><div><p>Profily kandidátů posíláme do 2 pracovních dnů od upřesnění role, v praxi často dřív. Samotný nástup pak závisí na výpovědní lhůtě a bezpečnostních prověrkách na vaší straně.</p></div></details>
+        <details><summary>Jak ověřujete senioritu kandidátů? <Icon name="i-chevron-down" /></summary><div><p>Než vám kandidáta představíme, technicky ho prověří náš senior ze stejné oblasti a ověříme reference z jeho předchozích projektů. Rozhodnutí je pak vždy na vás, po vlastním pohovoru.</p></div></details>
+        <details><summary>Co když specialista nebude sedět? <Icon name="i-chevron-down" /></summary><div><p>Řekněte nám to hned. Zajistíme náhradu a předání práce tak, aby projekt nestál.</p></div></details>
+        <details><summary>Podepíšete NDA a doložíte podklady pro výběr dodavatele? <Icon name="i-chevron-down" /></summary><div><p>Ano. NDA podepisujeme před sdílením detailů projektu a podklady pro výběr dodavatele vám doložíme na vyžádání.</p></div></details>
       </div>
     </div>
   </section>

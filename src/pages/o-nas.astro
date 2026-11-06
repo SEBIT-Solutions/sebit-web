@@ -1,28 +1,48 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import Ph from '../components/Ph.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Partner from '../components/Partner.astro';
+import Person from '../components/Person.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { manifest } from '../data/site';
-const people = ['Jednatel', 'Delivery Manager', 'Solution Architect', 'Data Engineer'];
+import { manifest, leadership, specialists, company } from '../data/site';
 ---
-<Base title="O nás a Manifest spolupracovníka" description="SEBIT Solutions s.r.o. z Mělníka: data, integrace, AI, weby a IT outsourcing. Sedm pravidel Manifestu, podle kterých nás můžete měřit.">
+<Base title="O nás a Manifest spolupracovníka" description="SEBIT Solutions s.r.o. z Mělníka: informace pro rozhodování, data, integrace, AI, weby a IT outsourcing. Vedení, lidé a sedm pravidel Manifestu.">
   <PageHero crumbs={[{ label: 'O nás' }]} title="Malý tým. Celý řetězec od dat po web."
-    lead="SEBIT Solutions je česká technologická firma z Mělníka. Propojujeme systémy, data a AI, stavíme weby a dodáváme IT specialisty do týmů klientů." >
-    <p class="w-body"><Ph>doplnit příběh založení a rok vzniku</Ph></p>
-  </PageHero>
-  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-team">
-    <div class="w-wrap">
-      <div class="w-head"><h2 class="w-h2" id="h-team">Lidé, se kterými budete mluvit</h2><p class="w-body">V technologické firmě je produktem člověk. Proto ukazujeme tváře, ne ilustrace.</p></div>
-      <div class="w-people">
-        {people.map((r) => (
-          <div class="w-person"><div class="w-media"><img src="/favicon.svg" alt="" /><span>Portrét <Ph>foto</Ph></span></div><b>Jméno Příjmení <Ph>doplnit</Ph></b><span class="w-small">{r}</span></div>
-        ))}
+    lead="SEBIT Solutions je česká technologická firma z Mělníka. Propojujeme systémy, data a AI, stavíme weby a dodáváme IT specialisty do týmů klientů." />
+
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-story">
+    <div class="w-wrap w-split">
+      <div class="w-stack w-sticky"><Eyebrow>Proč SEBIT</Eyebrow><h2 class="w-h2" id="h-story">Z bankovního IT do firem, které chtějí rozhodovat podle dat.</h2></div>
+      <div class="w-prose">
+        <p>SEBIT Solutions s.r.o. vznikla v roce 2025. Stojí na zkušenostech z velkých projektů v bankovním IT — z prostředí, kde se analýza, integrace a reporting dělají pořádně, protože chyba stojí peníze i důvěru.</p>
+        <p>Stejný přístup přinášíme firmám, které nemají vlastní velké IT oddělení: do provozu, financí a obchodu. Data, která už mají v ERP, účetnictví a skladu, propojíme a uděláme z nich přehledy, podle kterých se dá řídit. A když potřebují posílit vlastní tým, dodáme lidi, kteří to umí.</p>
+        <p>Pracujeme podle Manifestu níže. Nejdůležitější z něj: říkáme pravdu, i když není příjemná, a práci vykazujeme tak, abyste ji mohli kdykoli zkontrolovat.</p>
       </div>
     </div>
   </section>
+
+  <section class="w-section w-ground-surface" aria-labelledby="h-lead">
+    <div class="w-wrap">
+      <div class="w-head"><Eyebrow>Vedení</Eyebrow><h2 class="w-h2" id="h-lead">Kdo za SEBIT odpovídá</h2></div>
+      <div class="w-grid w-grid--2">
+        {leadership.map((p) => <Person name={p.name} role={p.role} email={p.email} text={p.text} large />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" aria-labelledby="h-team">
+    <div class="w-wrap">
+      <div class="w-head w-head--row">
+        <div><Eyebrow>Tým</Eyebrow><h2 class="w-h2" id="h-team">Lidé, se kterými budete pracovat</h2></div>
+        <a class="w-link" href="/it-outsourcing/">IT outsourcing a katalog rolí</a>
+      </div>
+      <div class="w-people">
+        {specialists.map((p) => <Person name={p.name} role={p.role} email={p.email} />)}
+      </div>
+    </div>
+  </section>
+
   <section class="w-section w-ground-surface" id="manifest" aria-labelledby="h-manifest">
     <div class="w-wrap">
       <div class="w-head"><Eyebrow>Manifest spolupracovníka</Eyebrow><h2 class="w-h2" id="h-manifest">Platí pro každého z nás. Každý den, na každém projektu.</h2></div>
@@ -31,8 +51,21 @@ const people = ['Jednatel', 'Delivery Manager', 'Solution Architect', 'Data Engi
       </ol>
     </div>
   </section>
+
   <section class="w-section w-ground-page" aria-labelledby="h-partners">
     <div class="w-wrap"><h2 class="w-h2" id="h-partners" style="margin-bottom:var(--sb-size-8)">Partneři</h2><Partner /></div>
+  </section>
+
+  <section class="w-section--tight w-ground-surface" aria-labelledby="h-firm">
+    <div class="w-wrap">
+      <h2 class="w-h4" id="h-firm" style="margin-bottom:var(--sb-size-4)">Firemní údaje</h2>
+      <dl class="w-facts w-facts--light">
+        <div><dt>Firma</dt><dd>{company.name}</dd></div>
+        <div><dt>Sídlo</dt><dd>{company.street}, {company.city}</dd></div>
+        <div><dt>IČO / DIČ</dt><dd>{company.ico} / {company.dic}</dd></div>
+        <div><dt>Rejstřík</dt><dd>{company.register}</dd></div>
+      </dl>
+    </div>
   </section>
   <CtaBand />
 </Base>

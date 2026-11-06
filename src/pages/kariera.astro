@@ -2,22 +2,22 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
-import Ph from '../components/Ph.astro';
-const jobs = [
-  ['Power BI Developer', 'Reporting a data · hybrid'],
-  ['Data Engineer (Microsoft Fabric)', 'Reporting a data · remote'],
-  ['Senior Business Analyst', 'IT outsourcing · Praha / hybrid'],
-];
 ---
 <Base title="Kariéra a SEBIT Academy" description="Pracujte na datových, integračních, AI a webových projektech. Placené stáže v SEBIT Academy pro studenty a juniory.">
   <PageHero crumbs={[{ label: 'Kariéra' }]} title="Data, AI, integrace a weby. Na skutečných projektech."
     lead="Hledáme seniory do datových, integračních, AI a webových projektů i do týmů u klientů. Studentům a juniorům nabízíme placené stáže v SEBIT Academy." />
   <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-jobs">
-    <div class="w-wrap">
-      <div class="w-head w-head--row"><div><h2 class="w-h2" id="h-jobs">Otevřené pozice</h2></div><Ph>nahradit skutečnými pozicemi</Ph></div>
-      <ul class="w-roles" style="list-style:none">
-        {jobs.map(([t, m]) => <li class="w-role"><div><div class="w-role__name">{t}</div><div class="w-role__area">{m}</div></div><a class="kit-btn kit-btn--ghost kit-btn--sm" href={`/kontakt/?need=academy&role=${encodeURIComponent(t)}`}>Mám zájem</a></li>)}
-      </ul>
+    <div class="w-wrap w-split">
+      <div class="w-stack"><h2 class="w-h2" id="h-jobs">Koho hledáme</h2><p class="w-body">Konkrétní pozice teď nevypisujeme. Lidi ale hledáme průběžně — ozvěte se, a až přijde projekt, který vám sedí, dáme vám vědět mezi prvními.</p></div>
+      <div class="w-stack">
+        <ul class="w-deliver" style="grid-template-columns:minmax(0,1fr)">
+          <li><Icon name="i-check-circle" /><div><b>Data a reporting</b><span>Power BI, Microsoft Fabric, SQL, datové modely</span></div></li>
+          <li><Icon name="i-check-circle" /><div><b>Integrace</b><span>API, SEBIT Gateway, ERP včetně Business Central</span></div></li>
+          <li><Icon name="i-check-circle" /><div><b>Analýza a řízení projektů</b><span>business a IT analytici, projektoví manažeři</span></div></li>
+          <li><Icon name="i-check-circle" /><div><b>Vývoj a bezpečnost</b><span>weby a aplikace, kybernetická bezpečnost</span></div></li>
+        </ul>
+        <div><a class="kit-btn kit-btn--primary" href="/kontakt/?need=academy">Poslat životopis</a></div>
+      </div>
     </div>
   </section>
   <section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-academy">
@@ -33,7 +33,7 @@ const jobs = [
         </ul>
         <div><a class="kit-btn kit-btn--lime kit-btn--lg" href="/kontakt/?need=academy">Přihlásit se na stáž</a></div>
       </div>
-      <div class="w-media w-media--navy"><img src="/favicon.svg" alt="" /><span>Dokumentární foto stážistů <Ph>foto</Ph></span></div>
+      <div class="w-media w-media--navy"><img src="/favicon.svg" alt="" /><span>SEBIT Academy</span></div>
     </div>
   </section>
 </Base>

@@ -5,7 +5,6 @@ import '../styles/ds/button_kit.css';
 import '../styles/ds/icon_kit.css';
 import '../styles/web.css';
 import Icon from '../components/Icon.astro';
-import Ph from '../components/Ph.astro';
 import { company } from '../data/site';
 
 interface Props {
@@ -46,6 +45,7 @@ const jsonLd = {
   vatID: company.dic,
   taxID: company.ico,
   address: { '@type': 'PostalAddress', streetAddress: company.street, postalCode: '276 01', addressLocality: 'Mělník', addressCountry: 'CZ' },
+  foundingDate: company.founded,
   sameAs: [company.linkedin],
   knowsAbout: ['Power BI', 'Microsoft Fabric', 'Datová integrace', 'AI', 'Vývoj webů', 'IT outsourcing', 'Základní registry', 'Oracle Forms'],
 };
@@ -145,7 +145,7 @@ const year = new Date().getFullYear();
       </div>
       <div class="w-footer__legal">
         <span>© {year} SEBIT Solutions s.r.o. Všechna práva vyhrazena.</span>
-        <span>{company.name} · {company.street}, {company.city} · IČO {company.ico} · DIČ {company.dic} · zapsaná v obchodním rejstříku <Ph>soud, oddíl C, vložka</Ph></span>
+        <span>{company.name} · {company.street}, {company.city} · IČO {company.ico} · DIČ {company.dic} · {company.register}</span>
       </div>
     </div>
   </footer>

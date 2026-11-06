@@ -7,12 +7,20 @@ export const company = {
   email: 'info@sebit.cz',
   phone: '+420 721 405 384',
   phoneHref: '+420721405384',
-  street: 'Zásušní 2926',
+  street: 'Zádušní 2926',
   city: '276 01 Mělník',
   ico: '22573780',
   dic: 'CZ22573780',
   linkedin: 'https://www.linkedin.com/company/sebit-solutions',
   url: 'https://www.sebit.cz',
+  register: 'zapsaná v obchodním rejstříku vedeném Městským soudem v Praze, oddíl C, vložka 418694',
+  founded: '2025-02-10',
+};
+
+// Response times promised on the site (owner, 2026-11-06).
+export const sla = {
+  standard: 'do 2 pracovních dnů',
+  critical: 'do 4 hodin',
 };
 
 export type Capability = {
@@ -41,11 +49,12 @@ export const capabilities: Capability[] = [
     short: 'Oracle Forms s novým frontendem a REST API, bez přepisu business logiky.',
     tags: ['Oracle Forms', 'PL/SQL', 'REST'] },
   { slug: 'it-outsourcing', href: '/it-outsourcing/', icon: 'i-users-cog', name: 'IT outsourcing',
-    short: 'Kapacitní outsourcing: analytici, architekti, vývojáři, testeři a data specialisté do vašeho týmu.',
+    short: 'Kapacitní outsourcing: projektoví manažeři, analytici, vývojáři, testeři, data a security specialisté do vašeho týmu.',
     tags: ['Bodyshopping', 'Team leasing', 'Na klíč'] },
 ];
 
 export type Detail = {
+  reference?: string;
   slug: string;
   name: string;
   title: string;
@@ -58,13 +67,13 @@ export type Detail = {
   stack: string[];
   projects: { t: string; d: string }[];
   offer: { t: string; d: string };
-  client?: string;
-  own?: { t: string; d: string; features: { icon: string; t: string; d: string }[]; todo: string };
+  own?: { t: string; d: string; features: { icon: string; t: string; d: string }[]; facts: [string, string][] };
 };
 
 export const details: Detail[] = [
   {
-    slug: 'reporting-a-data', name: 'Reporting a data', need: 'data', cta: 'Domluvit datový audit', client: 'Antwell',
+    slug: 'reporting-a-data', name: 'Reporting a data', need: 'data', cta: 'Domluvit datový audit',
+    reference: 'Firma z oboru plynárenství: integrace zdrojových systémů přes SEBIT Gateway, datová platforma v Microsoft Fabric a reporting provozu a financí v Power BI.',
     title: 'Reporting a data: Power BI a Microsoft Fabric',
     description: 'Informace pro rozhodování provozu a financí z dat, která už máte. Datová platforma v Microsoft Fabric a přehledy v Power BI.',
     h1: 'Informace pro rozhodování. Z dat, která už máte.',
@@ -109,6 +118,7 @@ export const details: Detail[] = [
   },
   {
     slug: 'integrace', name: 'Integrace', need: 'integrace', cta: 'Zmapovat integrace',
+    reference: 'Dopravní společnost a firma z oboru plynárenství: napojení ERP a provozních systémů přes SEBIT Gateway a datahub jako zdroj pro reporting.',
     title: 'Integrace systémů a SEBIT Gateway',
     description: 'Integrace ERP, CRM, e-shopu a státních registrů na vlastní platformě SEBIT Gateway: API gateway, datahub, monitoring a napojení na ERP.',
     h1: 'Systémy, které spolu mluví. Spolehlivě a s monitoringem.',
@@ -137,11 +147,16 @@ export const details: Detail[] = [
         { icon: 'i-chart-bar', t: 'Monitoring', d: 'Přehled o každé integraci: co proběhlo, co selhalo a kde.' },
         { icon: 'i-cubes', t: 'Napojení na ERP', d: 'Propojení ERP s e-shopem, skladem, účetnictvím a dalšími systémy.' },
       ],
-      todo: 'doplnit: nasazení (cloud / on-premise), podporované ERP systémy, reference',
+      facts: [
+        ['Podporovaná ERP', 'Microsoft Dynamics 365 Business Central a další systémy přes API'],
+        ['Nasazení', 'Podle vašich požadavků na bezpečnost a provoz'],
+        ['Kde běží', 'Dopravní společnost, firma z oboru plynárenství'],
+      ],
     },
   },
   {
-    slug: 'weby-a-aplikace', name: 'Weby a aplikace', need: 'weby', cta: 'Objednat webový audit', client: 'Profispojky',
+    slug: 'weby-a-aplikace', name: 'Weby a aplikace', need: 'weby', cta: 'Objednat webový audit',
+    reference: 'Velkoobchod se spojovacím materiálem: e-shop napojený na ERP a sklad, reporting prodeje a marže v Power BI.',
     title: 'Weby, e-shopy a webové aplikace',
     description: 'Firemní weby, e-shopy, B2B portály a interní aplikace. Rychlé, přístupné a napojené na vaše systémy.',
     h1: 'Weby a aplikace, které pracují pro vaše obchodní čísla.',
@@ -174,6 +189,7 @@ export const roles: [string, string][] = [
   ['Integration Analyst', 'Integrace'], ['System Architect', 'Integrace'], ['DevOps Specialist', 'Integrace'],
   ['AWS Developer', 'Cloud'], ['Azure Developer', 'Cloud'], ['DevOps Engineer', 'Cloud'],
   ['Power BI Developer', 'Data a AI'], ['Data Engineer (Microsoft Fabric)', 'Data a AI'], ['AI Engineer', 'Data a AI'],
+  ['Cyber Security Expert', 'Bezpečnost'],
 ];
 
 export const roleAreas: { area: string; icon: string; sprite: 'ui' | 'dom' }[] = [
@@ -186,16 +202,44 @@ export const roleAreas: { area: string; icon: string; sprite: 'ui' | 'dom' }[] =
   { area: 'Integrace', icon: 'i-exchange-alt', sprite: 'dom' },
   { area: 'Cloud', icon: 'i-cloud', sprite: 'dom' },
   { area: 'Data a AI', icon: 'i-chart-bar', sprite: 'dom' },
+  { area: 'Bezpečnost', icon: 'i-shield-alt', sprite: 'dom' },
 ];
 
-export const clients = ['Kralupol', 'Antwell', 'Profispojky', 'Avenga'];
+// Client names stay out until each client approves them (owner, 2026-11-06).
+// Sector descriptions stand in until then.
+export const sectors = ['Autodoprava', 'Plynárenství', 'Spojovací materiál', 'IT konzultace'];
 
 export const cases = [
-  { client: 'Kralupol', sector: 'Výroba', service: '[služba]', text: 'Co jsme dodali a jaký to mělo výsledek.' },
-  { client: 'Antwell', sector: 'Reporting a data', service: 'ověřit', text: 'Datová platforma a reporting v Microsoft Fabric a Power BI.' },
-  { client: 'Profispojky', sector: 'Weby a e-shop', service: 'ověřit', text: 'Web nebo e-shop napojený na sklad a ceny.' },
-  { client: 'Avenga', sector: 'IT outsourcing', service: 'ověřit', text: 'Seniorní specialisté v týmech na projektech klienta.' },
+  { sector: 'Autodoprava', title: 'Dopravní společnost', services: ['Integrace', 'Reporting a data'],
+    text: 'Propojení provozních systémů a přehled o zakázkách a nákladech dopravy.',
+    done: ['Napojení ERP a provozních systémů přes SEBIT Gateway', 'Datahub se zakázkami a náklady na jednom místě', 'Přehledy pro vedení a dispečink v Power BI'] },
+  { sector: 'Plynárenství', title: 'Firma z oboru plynárenství', services: ['Reporting a data', 'Integrace'],
+    text: 'Datová platforma, ze které vedení, provoz i finance čtou stejná čísla.',
+    done: ['Integrace zdrojových systémů přes SEBIT Gateway', 'Datová platforma v Microsoft Fabric', 'Reporting provozu a financí v Power BI'] },
+  { sector: 'Velkoobchod', title: 'Velkoobchod se spojovacím materiálem', services: ['Weby a aplikace', 'Integrace'],
+    text: 'Online prodej napojený na sklad a ERP, s přehledem o prodeji a marži.',
+    done: ['E-shop napojený na ERP a sklad', 'Synchronizace cen, dostupnosti a objednávek', 'Reporting prodeje a marže v Power BI'] },
+  { sector: 'IT služby', title: 'IT konzultační společnost', services: ['IT outsourcing'],
+    text: 'Kapacita seniorních specialistů pro projekty klienta, bez náboru na jeho straně.',
+    done: ['Analytici a vývojáři v týmech na projektech klienta', 'Rychlé doplnění kapacity podle potřeby projektu', 'Průběžný reporting odvedené práce'] },
 ];
+
+export const leadership = [
+  { name: 'Vojtěch Šebek', role: 'Head of Solutions', email: 'vojtech.sebek@sebit.cz',
+    text: 'Business analytik a projektový manažer s praxí v bankovním IT. Odpovídá za řešení, která navrhujeme, a za to, že je dodáme.' },
+  { name: null, role: null, email: null, text: null },
+];
+
+export const specialists = [
+  { name: 'Leona Biová', role: 'Senior projektová manažerka', catalog: 'Project Manager', email: 'leona.biova@sebit.cz' },
+  { name: 'Vojtěch Pastyřík', role: 'Integrační analytik', catalog: 'Integration Analyst', email: 'vojtech.pastyrik@sebit.cz' },
+  { name: 'Anna Michutová', role: 'Business analytička', catalog: 'Business Analyst', email: 'anna.michutova@sebit.cz' },
+  { name: 'Zdeněk Strnad', role: 'Expert na kybernetickou bezpečnost', catalog: 'Cyber Security Expert', email: 'zdenek.strnad@sebit.cz' },
+];
+
+export function initials(name: string): string {
+  return name.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+}
 
 export const manifest = [
   ['Transparentní výkaznictví', 'Práci vykazujeme v reálném čase a v 15minutových blocích. Naše výkazy jsou vždy přesným a pravdivým odrazem odvedené práce.'],

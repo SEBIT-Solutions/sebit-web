@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import Ph from '../components/Ph.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import HeroReport from '../components/HeroReport.astro';
 import QuestionPicker from '../components/QuestionPicker.astro';
@@ -10,7 +9,7 @@ import CaseCards from '../components/CaseCards.astro';
 import Partner from '../components/Partner.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Models from '../components/Models.astro';
-import { clients, roles } from '../data/site';
+import { sectors, roles } from '../data/site';
 ---
 <Base bare title="SEBIT Solutions — informace pro rozhodování, data, integrace, AI a IT outsourcing"
   description="Zpřístupníme data z ERP, účetnictví a skladu a uděláme z nich přehledy pro vedení, provoz a finance. Power BI a Microsoft Fabric, integrace, AI, weby a IT outsourcing.">
@@ -32,16 +31,16 @@ import { clients, roles } from '../data/site';
       <dl class="w-hero__proof">
         <div class="w-stat"><dt class="w-stat__l">oblastí od dat po weby a IT kapacity</dt><dd class="w-stat__n">6</dd></div>
         <div class="w-stat"><dt class="w-stat__l">rolí v katalogu IT specialistů</dt><dd class="w-stat__n">{roles.length}</dd></div>
-        <div class="w-stat"><dt class="w-stat__l">úspěšně obsazených pozic <Ph>ověřit</Ph></dt><dd class="w-stat__n">50+</dd></div>
+        <div class="w-stat"><dt class="w-stat__l">nejdéle trvá reakce na kritický požadavek</dt><dd class="w-stat__n">4 h</dd></div>
       </dl>
     </div>
   </section>
 
   <section class="w-section--tight w-ground-page" aria-labelledby="h-clients">
     <div class="w-wrap w-logobar">
-      <p class="w-small" id="h-clients"><b class="w-strong">Pracujeme pro</b><br />výrobu, obchod, IT služby a finance</p>
+      <p class="w-small" id="h-clients"><b class="w-strong">Pracujeme pro firmy z oborů</b><br />jména uvádíme se souhlasem klientů</p>
       <ul class="w-clients">
-        {clients.map((c) => <li class="w-client"><b>{c}</b><Ph>logo + souhlas</Ph></li>)}
+        {sectors.map((c) => <li class="w-client w-client--sector"><b>{c}</b></li>)}
       </ul>
     </div>
   </section>
@@ -112,7 +111,7 @@ import { clients, roles } from '../data/site';
       </div>
       <ol class="w-steps">
         <li class="w-step"><span class="w-step__n">01</span><div class="w-step__t"><span class="w-step__when">Den 1</span><h3 class="w-h4">Úvodní hovor</h3><p class="w-small">30 minut. Projdeme cíl, systémy, data, tým a termín. Bez závazku.</p></div></li>
-        <li class="w-step"><span class="w-step__n">02</span><div class="w-step__t"><span class="w-step__when"><Ph>do X dnů</Ph></span><h3 class="w-h4">Návrh řešení nebo lidí</h3><p class="w-small">Architektura a odhad pracnosti, nebo profily prověřených specialistů.</p></div></li>
+        <li class="w-step"><span class="w-step__n">02</span><div class="w-step__t"><span class="w-step__when">Do 2 pracovních dnů</span><h3 class="w-h4">Návrh řešení nebo lidí</h3><p class="w-small">Architektura a odhad pracnosti, nebo profily prověřených specialistů.</p></div></li>
         <li class="w-step"><span class="w-step__n">03</span><div class="w-step__t"><span class="w-step__when">Podle vás</span><h3 class="w-h4">Audit, prototyp nebo pohovor</h3><p class="w-small">Malý ověřitelný krok, než se zavážete k velkému.</p></div></li>
         <li class="w-step"><span class="w-step__n">04</span><div class="w-step__t"><span class="w-step__when">Dodávka</span><h3 class="w-h4">Práce a reporting</h3><p class="w-small">Výkazy v reálném čase, pravidelné demo, jeden kontakt na naší straně.</p></div></li>
       </ol>
@@ -141,7 +140,7 @@ import { clients, roles } from '../data/site';
       <div class="w-head w-head--row" style="margin-bottom:0">
         <div>
           <Eyebrow>Reference</Eyebrow>
-          <h2 class="w-h2" id="h-ref">Výsledky u klientů, které můžete ověřit.</h2>
+          <h2 class="w-h2" id="h-ref">Co jsme dodali firmám z dopravy, plynárenství, obchodu i IT.</h2>
         </div>
         <a class="w-link" href="/reference/">Všechny reference <Icon name="i-arrow-right" /></a>
       </div>

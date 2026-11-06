@@ -1,14 +1,19 @@
 ---
-import Ph from './Ph.astro';
+import Icon from './Icon.astro';
 import { cases } from '../data/site';
 ---
 <div class="w-grid w-grid--2">
   {cases.map((c) => (
     <article class="w-case">
-      <div class="w-case__meta"><span class="w-badge w-badge--light">{c.sector}</span> <Ph>{c.service}</Ph></div>
-      <h3 class="w-h3">{c.client}</h3>
-      <p class="w-small">{c.text}</p>
-      <div class="w-case__kpis"><div><b><Ph>X</Ph></b><span>měřitelný výsledek</span></div><div><b><Ph>X</Ph></b><span>měsíců spolupráce</span></div></div>
+      <div class="w-case__meta">{c.services.map((s) => <span class="w-badge w-badge--light">{s}</span>)}</div>
+      <div class="w-stack" style="gap:var(--sb-size-2)">
+        <span class="w-case__sector">{c.sector}</span>
+        <h3 class="w-h3">{c.title}</h3>
+        <p class="w-small">{c.text}</p>
+      </div>
+      <ul class="w-case__done">
+        {c.done.map((d) => <li><Icon name="i-check-circle" /><span>{d}</span></li>)}
+      </ul>
     </article>
   ))}
 </div>

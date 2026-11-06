@@ -2,7 +2,6 @@
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
-import Ph from '../../components/Ph.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { details, type Detail } from '../../data/site';
@@ -42,7 +41,7 @@ const contact = `/kontakt/?need=${d.need}`;
                 <li><span class="w-segw__ic"><Icon name={f.icon} sprite="dom" /></span><div><b>{f.t}</b><span>{f.d}</span></div></li>
               ))}
             </ul>
-            <p class="w-small"><Ph>{d.own.todo}</Ph></p>
+            <dl class="w-facts">{d.own.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
           </div>
         </div>
       )}
@@ -59,12 +58,12 @@ const contact = `/kontakt/?need=${d.need}`;
       <div class="w-projects">
         {d.projects.map((p) => <div class="w-project"><h3 class="w-h4">{p.t}</h3><p>{p.d}</p></div>)}
       </div>
-      {d.client && <p class="w-small">Reference: <b class="w-strong">{d.client}</b> <Ph>ověřit a doplnit případovou studii</Ph></p>}
+      {d.reference && <p class="w-ref"><b>Z praxe:</b> {d.reference} <a class="w-link" href="/reference/">Reference <Icon name="i-arrow-right" /></a></p>}
       <div class="w-offer w-on-navy">
         <div class="w-stack" style="gap:var(--sb-size-2)">
           <Eyebrow signet={false}>První krok</Eyebrow>
           <h2 class="w-h3">{d.offer.t}</h2>
-          <p>{d.offer.d} <Ph>rozsah a cena</Ph></p>
+          <p>{d.offer.d} Pevný rozsah a cenu znáte předem.</p>
         </div>
         <a class="kit-btn kit-btn--on-navy kit-btn--lg" href={contact}>{d.cta}</a>
       </div>

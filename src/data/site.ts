@@ -73,7 +73,7 @@ export type Detail = {
 export const details: Detail[] = [
   {
     slug: 'reporting-a-data', name: 'Reporting a data', need: 'data', cta: 'Domluvit datový audit',
-    reference: 'Firma z oboru plynárenství: integrace zdrojových systémů přes SEBIT Gateway, datová platforma v Microsoft Fabric a reporting provozu a financí v Power BI.',
+    reference: 'Dopravní a logistická společnost: integrace systémů přes SEBIT Gateway, datová platforma v Microsoft Fabric a reporting přeprav, servisu a financí v Power BI.',
     title: 'Reporting a data: Power BI a Microsoft Fabric',
     description: 'Informace pro rozhodování provozu a financí z dat, která už máte. Datová platforma v Microsoft Fabric a přehledy v Power BI.',
     h1: 'Informace pro rozhodování. Z dat, která už máte.',
@@ -118,7 +118,7 @@ export const details: Detail[] = [
   },
   {
     slug: 'integrace', name: 'Integrace', need: 'integrace', cta: 'Zmapovat integrace',
-    reference: 'Dopravní společnost a firma z oboru plynárenství: napojení ERP a provozních systémů přes SEBIT Gateway a datahub jako zdroj pro reporting.',
+    reference: 'Dopravní a logistická společnost, dodavatel LPG a řešení nad Business Central s integračním partnerem: napojení ERP a provozních systémů přes SEBIT Gateway a datahub jako zdroj pro reporting.',
     title: 'Integrace systémů a SEBIT Gateway',
     description: 'Integrace ERP, CRM, e-shopu a státních registrů na vlastní platformě SEBIT Gateway: API gateway, datahub, monitoring a napojení na ERP.',
     h1: 'Systémy, které spolu mluví. Spolehlivě a s monitoringem.',
@@ -150,13 +150,13 @@ export const details: Detail[] = [
       facts: [
         ['Podporovaná ERP', 'Microsoft Dynamics 365 Business Central a další systémy přes API'],
         ['Nasazení', 'Podle vašich požadavků na bezpečnost a provoz'],
-        ['Kde běží', 'Dopravní společnost, firma z oboru plynárenství'],
+        ['Kde běží', 'Autodoprava a logistika, dodavatel LPG, řešení nad Business Central s naším integračním partnerem'],
       ],
     },
   },
   {
     slug: 'weby-a-aplikace', name: 'Weby a aplikace', need: 'weby', cta: 'Objednat webový audit',
-    reference: 'Velkoobchod se spojovacím materiálem: e-shop napojený na ERP a sklad, reporting prodeje a marže v Power BI.',
+    reference: 'Prodejce spojek pro vodu a plyn: e-shop napojený na ERP a sklad, reporting prodeje a marže v Power BI.',
     title: 'Weby, e-shopy a webové aplikace',
     description: 'Firemní weby, e-shopy, B2B portály a interní aplikace. Rychlé, přístupné a napojené na vaše systémy.',
     h1: 'Weby a aplikace, které pracují pro vaše obchodní čísla.',
@@ -206,18 +206,18 @@ export const roleAreas: { area: string; icon: string; sprite: 'ui' | 'dom' }[] =
 ];
 
 // Client names stay out until each client approves them (owner, 2026-11-06).
-// Sector descriptions stand in until then.
-export const sectors = ['Autodoprava', 'Plynárenství', 'Spojovací materiál', 'IT konzultace'];
+// Sectors verified against each client's own website and ARES on 2026-11-06.
+export const sectors = ['Autodoprava a logistika', 'Dodávky LPG a technických plynů', 'Spojky pro vodu a plyn', 'IT konzultace', 'Integrátor Business Central'];
 
 export const cases = [
-  { sector: 'Autodoprava', title: 'Dopravní společnost', services: ['Integrace', 'Reporting a data'],
-    text: 'Propojení provozních systémů a přehled o zakázkách a nákladech dopravy.',
-    done: ['Napojení ERP a provozních systémů přes SEBIT Gateway', 'Datahub se zakázkami a náklady na jednom místě', 'Přehledy pro vedení a dispečink v Power BI'] },
-  { sector: 'Plynárenství', title: 'Firma z oboru plynárenství', services: ['Reporting a data', 'Integrace'],
-    text: 'Datová platforma, ze které vedení, provoz i finance čtou stejná čísla.',
-    done: ['Integrace zdrojových systémů přes SEBIT Gateway', 'Datová platforma v Microsoft Fabric', 'Reporting provozu a financí v Power BI'] },
-  { sector: 'Velkoobchod', title: 'Velkoobchod se spojovacím materiálem', services: ['Weby a aplikace', 'Integrace'],
-    text: 'Online prodej napojený na sklad a ERP, s přehledem o prodeji a marži.',
+  { sector: 'Autodoprava a logistika', title: 'Dopravní a logistická společnost', services: ['Reporting a data', 'Integrace'],
+    text: 'Přeprava, servis a pronájem techniky v jednom datovém modelu. Vedení, provoz i finance čtou stejná čísla.',
+    done: ['Integrace provozních a ekonomických systémů přes SEBIT Gateway', 'Datová platforma v Microsoft Fabric', 'Reporting přeprav, servisu a financí v Power BI'] },
+  { sector: 'Plynárenství', title: 'Dodavatel LPG a technických plynů', services: ['Integrace', 'Reporting a data'],
+    text: 'Propojení systémů pro prodej a distribuci plynu a přehled, podle kterého se řídí provoz i obchod.',
+    done: ['Napojení ERP a provozních systémů přes SEBIT Gateway', 'Datahub s daty z prodeje a distribuce na jednom místě', 'Přehledy pro vedení a obchod v Power BI'] },
+  { sector: 'Velkoobchod a e-commerce', title: 'Prodejce spojek pro vodu a plyn', services: ['Weby a aplikace', 'Integrace'],
+    text: 'Online prodej spojek a tvarovek napojený na sklad a ERP, s přehledem o prodeji a marži.',
     done: ['E-shop napojený na ERP a sklad', 'Synchronizace cen, dostupnosti a objednávek', 'Reporting prodeje a marže v Power BI'] },
   { sector: 'IT služby', title: 'IT konzultační společnost', services: ['IT outsourcing'],
     text: 'Kapacita seniorních specialistů pro projekty klienta, bez náboru na jeho straně.',
@@ -225,9 +225,10 @@ export const cases = [
 ];
 
 export const leadership = [
-  { name: 'Vojtěch Šebek', role: 'Head of Solutions', email: 'vojtech.sebek@sebit.cz',
-    text: 'Business analytik a projektový manažer s praxí v bankovním IT. Odpovídá za řešení, která navrhujeme, a za to, že je dodáme.' },
-  { name: null, role: null, email: null, text: null },
+  { name: 'Vojtěch Šebek', title: 'Ing.', role: 'Jednatel · Head of Solutions', email: 'vojtech.sebek@sebit.cz', phone: null,
+    text: 'Spoluzakladatel firmy. Business analytik a projektový manažer s praxí v bankovním IT. Odpovídá za řešení, která navrhujeme, a za to, že je dodáme.' },
+  { name: 'Petra Šebková Horynová', title: 'Ing.', role: 'Jednatelka · konzultantka', email: 'petra.sebkova@sebit.cz', phone: '+420 777 945 166',
+    text: 'Spoluzakladatelka firmy. Jako konzultantka se stará o klienty a o to, aby spolupráce běžela hladce od první poptávky po předání.' },
 ];
 
 export const specialists = [

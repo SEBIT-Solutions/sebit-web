@@ -15,7 +15,7 @@ import { manifest, leadership, specialists, company } from '../data/site';
     <div class="w-wrap w-split">
       <div class="w-stack w-sticky"><Eyebrow>Proč SEBIT</Eyebrow><h2 class="w-h2" id="h-story">Z bankovního IT do firem, které chtějí rozhodovat podle dat.</h2></div>
       <div class="w-prose">
-        <p>SEBIT Solutions s.r.o. vznikla v roce 2025. Stojí na zkušenostech z velkých projektů v bankovním IT — z prostředí, kde se analýza, integrace a reporting dělají pořádně, protože chyba stojí peníze i důvěru.</p>
+        <p>SEBIT Solutions s.r.o. jsme založili v roce 2025 — Vojtěch Šebek a Petra Šebková Horynová. Firma stojí na zkušenostech z velkých projektů v bankovním IT — z prostředí, kde se analýza, integrace a reporting dělají pořádně, protože chyba stojí peníze i důvěru.</p>
         <p>Stejný přístup přinášíme firmám, které nemají vlastní velké IT oddělení: do provozu, financí a obchodu. Data, která už mají v ERP, účetnictví a skladu, propojíme a uděláme z nich přehledy, podle kterých se dá řídit. A když potřebují posílit vlastní tým, dodáme lidi, kteří to umí.</p>
         <p>Pracujeme podle Manifestu níže. Nejdůležitější z něj: říkáme pravdu, i když není příjemná, a práci vykazujeme tak, abyste ji mohli kdykoli zkontrolovat.</p>
       </div>
@@ -26,7 +26,7 @@ import { manifest, leadership, specialists, company } from '../data/site';
     <div class="w-wrap">
       <div class="w-head"><Eyebrow>Vedení</Eyebrow><h2 class="w-h2" id="h-lead">Kdo za SEBIT odpovídá</h2></div>
       <div class="w-grid w-grid--2">
-        {leadership.map((p) => <Person name={p.name} role={p.role} email={p.email} text={p.text} large />)}
+        {leadership.map((p) => <Person name={p.name} title={p.title} role={p.role} email={p.email} phone={p.phone} text={p.text} large />)}
       </div>
     </div>
   </section>

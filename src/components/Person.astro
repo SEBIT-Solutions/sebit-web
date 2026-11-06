@@ -1,17 +1,17 @@
 ---
 import { initials } from '../data/site';
-import Ph from './Ph.astro';
 // Portrait photos come later (owner, 2026-11-06); until then a monogram on a
 // flat navy tile, as brand §7.2 asks for placeholders.
-interface Props { name: string | null; role: string | null; email: string | null; text?: string | null; large?: boolean }
-const { name, role, email, text, large = false } = Astro.props;
+interface Props { name: string; title?: string | null; role: string; email: string; phone?: string | null; text?: string | null; large?: boolean }
+const { name, title, role, email, phone, text, large = false } = Astro.props;
 ---
 <article class:list={['w-person', large && 'w-person--lg']}>
-  <div class="w-avatar" aria-hidden="true">{name ? initials(name) : '·'}</div>
+  <div class="w-avatar" aria-hidden="true">{initials(name)}</div>
   <div class="w-stack" style="gap:var(--sb-size-1)">
-    <h3 class="w-h4">{name ?? <Ph>jméno</Ph>}</h3>
-    <span class="w-small">{role ?? <Ph>role</Ph>}</span>
+    <h3 class="w-h4">{title ? `${title} ${name}` : name}</h3>
+    <span class="w-small">{role}</span>
     {text && <p class="w-small w-person__text">{text}</p>}
-    {email ? <a class="w-person__mail" href={`mailto:${email}`}>{email}</a> : <Ph>e-mail</Ph>}
+    <a class="w-person__mail" href={`mailto:${email}`}>{email}</a>
+    {phone && <a class="w-person__mail" href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>}
   </div>
 </article>

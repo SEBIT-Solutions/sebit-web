@@ -587,3 +587,7 @@ a.w-case:hover { border-color: var(--sb-border-brand); }
 .w-ref { font-size: var(--sb-font-size-15); color: var(--sb-fg-secondary); max-width: 80ch; }
 .w-ref b { color: var(--sb-fg-default); }
 .w-footer .w-small { color: var(--sb-fg-on-inverse-subtle); }
+.w-clients { display: flex; flex-wrap: wrap; gap: var(--sb-size-3); }
+.w-client--sector { flex: 1 1 180px; height: auto; min-height: 72px; }
+.w-case__done--plain { margin-top: 0; padding-top: 0; border-top: 0; }
+.w-partner { align-items: flex-start; }

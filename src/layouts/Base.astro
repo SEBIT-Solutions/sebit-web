@@ -46,6 +46,7 @@ const jsonLd = {
   taxID: company.ico,
   address: { '@type': 'PostalAddress', streetAddress: company.street, postalCode: '276 01', addressLocality: 'Mělník', addressCountry: 'CZ' },
   foundingDate: company.founded,
+  founder: [{ '@type': 'Person', name: 'Ing. Vojtěch Šebek' }, { '@type': 'Person', name: 'Ing. Petra Šebková Horynová' }],
   sameAs: [company.linkedin],
   knowsAbout: ['Power BI', 'Microsoft Fabric', 'Datová integrace', 'AI', 'Vývoj webů', 'IT outsourcing', 'Základní registry', 'Oracle Forms'],
 };

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /timeline/
 Disallow: /jira/
 
-Sitemap: https://www.sebit.cz/sitemap.xml
+Sitemap: https://sebit.cz/sitemap.xml

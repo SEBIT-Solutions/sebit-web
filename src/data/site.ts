@@ -12,7 +12,7 @@ export const company = {
   ico: '22573780',
   dic: 'CZ22573780',
   linkedin: 'https://www.linkedin.com/company/sebit-solutions',
-  url: 'https://www.sebit.cz',
+  url: 'https://sebit.cz',
   register: 'zapsaná v obchodním rejstříku vedeném Městským soudem v Praze, oddíl C, vložka 418694',
   founded: '2025-02-10',
 };

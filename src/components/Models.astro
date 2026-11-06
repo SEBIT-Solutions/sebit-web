@@ -1,25 +1,25 @@
 ---
 import Icon from './Icon.astro';
+// Each card is its own toggle: click (or Enter / Space on the focused card title) to highlight it.
 const models = [
-  { key: 'tm', tag: 'Time & Material', name: 'IT specialista do týmu', fit: 'Senior specialista nastoupí do vašeho týmu a pracuje podle vašich priorit.',
+  { key: 'tm', need: 'Doplnit konkrétní roli do týmu', tag: 'Time & Material', name: 'IT specialista do týmu', fit: 'Senior specialista nastoupí do vašeho týmu a pracuje podle vašich priorit.',
     rows: [['Řídí práci', 'Vy'], ['Nese riziko', 'Vy, my garantujeme kvalitu lidí'], ['Fakturace', 'MD sazba podle výkazu'], ['Nástup', null]] },
-  { key: 'tl', tag: 'Team leasing', name: 'Tým na míru', fit: 'Sestavíme sehraný tým — analytik, vývojáři, data engineer, tester — a vy ho řídíte jako vlastní.',
+  { key: 'tl', need: 'Postavit celý tým', tag: 'Team leasing', name: 'Tým na míru', fit: 'Sestavíme sehraný tým — analytik, vývojáři, data engineer, tester — a vy ho řídíte jako vlastní.',
     rows: [['Řídí práci', 'Vy, s naším team leadem'], ['Nese riziko', 'Sdílené'], ['Fakturace', 'Měsíčně za tým'], ['Nástup', null]] },
-  { key: 'fp', tag: 'Fixed Time & Fixed Price', name: 'Projekt na klíč', fit: 'Pevný rozsah, termín a cena. Datová platforma, integrace nebo web — řízení je na nás.',
+  { key: 'fp', need: 'Dostat výsledek za pevnou cenu', tag: 'Fixed Time & Fixed Price', name: 'Projekt na klíč', fit: 'Pevný rozsah, termín a cena. Datová platforma, integrace nebo web — řízení je na nás.',
     rows: [['Řídí práci', 'My'], ['Nese riziko', 'My, smluvní záruky'], ['Fakturace', 'Po milnících'], ['Start', 'Po schválení analýzy']] },
 ] as const;
 const start: Record<string, string> = { tm: 'Profily do 2 pracovních dnů', tl: 'První profily do 2 pracovních dnů' };
 ---
-<div class="w-picker" role="group" aria-label="Co potřebujete vyřešit">
-  <button class="w-chip" type="button" aria-pressed="false" data-pick="tm">Doplnit konkrétní roli do týmu</button>
-  <button class="w-chip" type="button" aria-pressed="false" data-pick="tl">Postavit celý tým</button>
-  <button class="w-chip" type="button" aria-pressed="false" data-pick="fp">Dostat výsledek za pevnou cenu</button>
-</div>
-<div class="w-models" id="models">
+<div class="w-models" id="models" role="group" aria-label="Modely spolupráce — vyberte, co potřebujete vyřešit">
   {models.map((m) => (
     <article class="w-model" data-model={m.key}>
+      <div class="w-model__head">
+        <span class="w-model__need">Když potřebujete<br /><b>{m.need}</b></span>
+        <span class="w-model__mark" aria-hidden="true"></span>
+      </div>
       <span class="w-model__tag">{m.tag}</span>
-      <h3 class="w-h3">{m.name}</h3>
+      <h3 class="w-h3"><button class="w-model__pick" type="button" aria-pressed="false">{m.name}</button></h3>
       <p class="w-model__fit">{m.fit}</p>
       <dl>{m.rows.map(([k, v]) => <div><dt>{k}</dt><dd>{v ?? start[m.key]}</dd></div>)}</dl>
       <a class="w-link" href="/it-outsourcing/">Detail modelu <Icon name="i-arrow-right" /></a>
@@ -27,16 +27,17 @@ const start: Record<string, string> = { tm: 'Profily do 2 pracovních dnů', tl:
   ))}
 </div>
 <script>
-  const models = document.getElementById('models');
-  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-pick]'));
-  chips.forEach((b) => b.addEventListener('click', () => {
-    const on = b.getAttribute('aria-pressed') !== 'true';
-    chips.forEach((x) => x.setAttribute('aria-pressed', 'false'));
-    models?.querySelectorAll('.w-model').forEach((m) => m.classList.remove('is-active'));
-    if (on && models) {
-      b.setAttribute('aria-pressed', 'true');
-      models.setAttribute('data-active', b.dataset.pick ?? '');
-      models.querySelector(`[data-model="${b.dataset.pick}"]`)?.classList.add('is-active');
-    } else models?.removeAttribute('data-active');
-  }));
+  // One card highlighted at a time; clicking the highlighted card clears it.
+  document.querySelectorAll<HTMLElement>('.w-models').forEach((group) => {
+    const picks = Array.from(group.querySelectorAll<HTMLButtonElement>('.w-model__pick'));
+    picks.forEach((btn) => btn.addEventListener('click', () => {
+      const on = btn.getAttribute('aria-pressed') !== 'true';
+      picks.forEach((b) => { b.setAttribute('aria-pressed', 'false'); b.closest('.w-model')?.classList.remove('is-active'); });
+      if (on) {
+        btn.setAttribute('aria-pressed', 'true');
+        btn.closest('.w-model')?.classList.add('is-active');
+        group.setAttribute('data-active', '');
+      } else group.removeAttribute('data-active');
+    }));
+  });
 </script>

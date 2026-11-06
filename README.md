@@ -5,7 +5,7 @@ Web SEBIT Solutions s.r.o. — informace pro rozhodování provozu a financí, d
 ## Stack
 
 - **Astro 5**, statický výstup, bez klientského frameworku. JavaScript jen tam, kde je interakce (report, katalog rolí, formulář, menu).
-- **SEBIT Design System**: tokeny, kity, font Inter, loga a ikony jsou zkopírované z repozitáře [`sebit-design`](https://github.com/SEBIT-Solutions/sebit-design) (stav `main` 7a51eb0). Nic z toho se needituje ručně, viz níže.
+- **SEBIT Design System**: tokeny, kity, font Inter, loga a ikony jsou zkopírované z repozitáře [`sebit-design`](https://github.com/SEBIT-Solutions/sebit-design) (stav `main` 7a51eb0; loga jako křivky z PR sebit-design #5, d8e8942). Nic z toho se needituje ručně, viz níže.
 - **GitHub Pages** přes GitHub Actions (`.github/workflows/deploy.yml`), doména `sebit.cz` (`public/CNAME`; `www.sebit.cz` přesměrovává na ni). `site` v `astro.config.mjs` musí odpovídat CNAME.
 
 ## Příkazy

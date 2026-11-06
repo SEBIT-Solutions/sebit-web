@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import Ph from '../../components/Ph.astro';
+import CtaBand from '../../components/CtaBand.astro';
+const principles = [
+  ['Zachování logiky.', 'Všechny procedury a formy zůstávají beze změny. Akce se volají vzdáleně přes REST API.'],
+  ['Endpoint pro každou akci.', 'Každé tlačítko a formulář má vlastní endpoint, což snižuje riziko konfliktů a zjednodušuje správu.'],
+  ['Moderní frontend.', 'Uživatelé pracují v novém rozhraní, Oracle Forms běží dál na pozadí.'],
+  ['Postupný přechod.', 'Díky oddělené API vrstvě migrujete po částech a vyhnete se kompletnímu přepisu.'],
+];
+---
+<Base title="Modernizace Oracle Forms přes REST API" description="Odejděte z Oracle Forms bez přepisu business logiky: REST vrstva nad stávající aplikací, nový frontend a postupná migrace po obrazovkách.">
+  <PageHero crumbs={[{ href: '/co-delame/', label: 'Co děláme' }, { label: 'Modernizace Oracle Forms' }]}
+    title="Odejděte z Oracle Forms bez přepisu business logiky."
+    lead="Původní aplikace dál běží na pozadí. Nad ní postavíme REST vrstvu a moderní frontend — a migrujete po jednotlivých obrazovkách, ne velkým třeskem.">
+    <div class="w-hero__actions"><a class="kit-btn kit-btn--primary kit-btn--lg" href="/kontakt/?need=modernizace">Probrat vaši aplikaci</a></div>
+  </PageHero>
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-of-arch">
+    <div class="w-wrap w-split w-split--even">
+      <div class="w-stack">
+        <h2 class="w-h2" id="h-of-arch">Čtyři principy řešení</h2>
+        <ul class="w-checks">{principles.map(([b, t]) => <li><Icon name="i-check-circle" /><span><b>{b}</b> {t}</span></li>)}</ul>
+      </div>
+      <div class="w-arch" role="img" aria-label="Schéma: moderní frontend volá REST API vrstvu, ta volá beze změny zachované Oracle Forms a Oracle Database">
+        <div class="w-arch__l w-arch__l--new"><div><b>Moderní frontend</b><span>web, mobil nebo integrace třetích stran</span></div><span class="w-badge">Fáze 2</span></div>
+        <div class="w-arch__join"><Icon name="i-arrow-right" /></div>
+        <div class="w-arch__l w-arch__l--api"><div><b>REST API vrstva</b><span>jeden endpoint na akci, verzované, logované</span>
+          <div class="w-endpoints"><code>POST /smlouvy/&#123;id&#125;/schvalit</code><code>GET /klienti/&#123;id&#125;</code><code>PUT /pojistky/&#123;id&#125;</code></div></div><span class="w-badge w-badge--light">Fáze 1</span></div>
+        <div class="w-arch__join"><Icon name="i-arrow-right" /></div>
+        <div class="w-arch__l w-arch__l--keep"><div><b>Oracle Forms a PL/SQL</b><span>business logika beze změny</span></div><span class="w-badge w-badge--light">Zůstává</span></div>
+        <div class="w-arch__join"><Icon name="i-arrow-right" /></div>
+        <div class="w-arch__l w-arch__l--keep"><div><b>Oracle Database</b><span>data a procedury</span></div><span class="w-badge w-badge--light">Zůstává</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-of-ref">
+    <div class="w-wrap w-split w-split--wide-left">
+      <figure class="w-stack" style="margin:0">
+        <blockquote class="w-h2" style="margin:0" id="h-of-ref">„Migrace z Oracle Forms proběhla bez výpadku provozu.“</blockquote>
+        <figcaption class="w-small">CTO, pojišťovna, Brno <Ph>jméno se souhlasem</Ph></figcaption>
+      </figure>
+      <div class="w-stack"><p class="w-lead">Chcete vědět, kolik obrazovek a procedur vaše aplikace má a jak dlouho by přechod trval?</p><div><a class="kit-btn kit-btn--on-navy kit-btn--lg" href="/kontakt/?need=modernizace">Domluvit technický audit</a></div></div>
+    </div>
+  </section>
+  <CtaBand cta="Probrat vaši aplikaci" href="/kontakt/?need=modernizace" />
+</Base>

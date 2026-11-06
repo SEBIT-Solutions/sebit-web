@@ -1,0 +1,43 @@
+---
+import Icon from './Icon.astro';
+import Ph from './Ph.astro';
+const models = [
+  { key: 'tm', tag: 'Time & Material', name: 'IT specialista do týmu', fit: 'Senior specialista nastoupí do vašeho týmu a pracuje podle vašich priorit.',
+    rows: [['Řídí práci', 'Vy'], ['Nese riziko', 'Vy, my garantujeme kvalitu lidí'], ['Fakturace', 'MD sazba podle výkazu'], ['Nástup', null]] },
+  { key: 'tl', tag: 'Team leasing', name: 'Tým na míru', fit: 'Sestavíme sehraný tým — analytik, vývojáři, data engineer, tester — a vy ho řídíte jako vlastní.',
+    rows: [['Řídí práci', 'Vy, s naším team leadem'], ['Nese riziko', 'Sdílené'], ['Fakturace', 'Měsíčně za tým'], ['Nástup', null]] },
+  { key: 'fp', tag: 'Fixed Time & Fixed Price', name: 'Projekt na klíč', fit: 'Pevný rozsah, termín a cena. Datová platforma, integrace nebo web — řízení je na nás.',
+    rows: [['Řídí práci', 'My'], ['Nese riziko', 'My, smluvní záruky'], ['Fakturace', 'Po milnících'], ['Start', 'Po schválení analýzy']] },
+] as const;
+const startPh: Record<string, string> = { tm: 'do X pracovních dnů', tl: 'do X týdnů' };
+---
+<div class="w-picker" role="group" aria-label="Co potřebujete vyřešit">
+  <button class="w-chip" type="button" aria-pressed="false" data-pick="tm">Doplnit konkrétní roli do týmu</button>
+  <button class="w-chip" type="button" aria-pressed="false" data-pick="tl">Postavit celý tým</button>
+  <button class="w-chip" type="button" aria-pressed="false" data-pick="fp">Dostat výsledek za pevnou cenu</button>
+</div>
+<div class="w-models" id="models">
+  {models.map((m) => (
+    <article class="w-model" data-model={m.key}>
+      <span class="w-model__tag">{m.tag}</span>
+      <h3 class="w-h3">{m.name}</h3>
+      <p class="w-model__fit">{m.fit}</p>
+      <dl>{m.rows.map(([k, v]) => <div><dt>{k}</dt><dd>{v ?? <Ph>{startPh[m.key]}</Ph>}</dd></div>)}</dl>
+      <a class="w-link" href="/it-outsourcing/">Detail modelu <Icon name="i-arrow-right" /></a>
+    </article>
+  ))}
+</div>
+<script>
+  const models = document.getElementById('models');
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-pick]'));
+  chips.forEach((b) => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    chips.forEach((x) => x.setAttribute('aria-pressed', 'false'));
+    models?.querySelectorAll('.w-model').forEach((m) => m.classList.remove('is-active'));
+    if (on && models) {
+      b.setAttribute('aria-pressed', 'true');
+      models.setAttribute('data-active', b.dataset.pick ?? '');
+      models.querySelector(`[data-model="${b.dataset.pick}"]`)?.classList.add('is-active');
+    } else models?.removeAttribute('data-active');
+  }));
+</script>

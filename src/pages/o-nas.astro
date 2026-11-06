@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Ph from '../components/Ph.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Partner from '../components/Partner.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { manifest } from '../data/site';
+const people = ['Jednatel', 'Delivery Manager', 'Solution Architect', 'Data Engineer'];
+---
+<Base title="O nás a Manifest spolupracovníka" description="SEBIT Solutions s.r.o. z Mělníka: data, integrace, AI, weby a IT outsourcing. Sedm pravidel Manifestu, podle kterých nás můžete měřit.">
+  <PageHero crumbs={[{ label: 'O nás' }]} title="Malý tým. Celý řetězec od dat po web."
+    lead="SEBIT Solutions je česká technologická firma z Mělníka. Propojujeme systémy, data a AI, stavíme weby a dodáváme IT specialisty do týmů klientů." >
+    <p class="w-body"><Ph>doplnit příběh založení a rok vzniku</Ph></p>
+  </PageHero>
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-team">
+    <div class="w-wrap">
+      <div class="w-head"><h2 class="w-h2" id="h-team">Lidé, se kterými budete mluvit</h2><p class="w-body">V technologické firmě je produktem člověk. Proto ukazujeme tváře, ne ilustrace.</p></div>
+      <div class="w-people">
+        {people.map((r) => (
+          <div class="w-person"><div class="w-media"><img src="/favicon.svg" alt="" /><span>Portrét <Ph>foto</Ph></span></div><b>Jméno Příjmení <Ph>doplnit</Ph></b><span class="w-small">{r}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="w-section w-ground-surface" id="manifest" aria-labelledby="h-manifest">
+    <div class="w-wrap">
+      <div class="w-head"><Eyebrow>Manifest spolupracovníka</Eyebrow><h2 class="w-h2" id="h-manifest">Platí pro každého z nás. Každý den, na každém projektu.</h2></div>
+      <ol class="w-manifest-list">
+        {manifest.map(([t, d], i) => <li><span class="w-n">{String(i + 1).padStart(2, '0')}</span><h3 class="w-h3">{t}</h3><p>{d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+  <section class="w-section w-ground-page" aria-labelledby="h-partners">
+    <div class="w-wrap"><h2 class="w-h2" id="h-partners" style="margin-bottom:var(--sb-size-8)">Partneři</h2><Partner /></div>
+  </section>
+  <CtaBand />
+</Base>

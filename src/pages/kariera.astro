@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Ph from '../components/Ph.astro';
+const jobs = [
+  ['Power BI Developer', 'Reporting a data · hybrid'],
+  ['Data Engineer (Microsoft Fabric)', 'Reporting a data · remote'],
+  ['Senior Business Analyst', 'IT outsourcing · Praha / hybrid'],
+];
+---
+<Base title="Kariéra a SEBIT Academy" description="Pracujte na datových, integračních, AI a webových projektech. Placené stáže v SEBIT Academy pro studenty a juniory.">
+  <PageHero crumbs={[{ label: 'Kariéra' }]} title="Data, AI, integrace a weby. Na skutečných projektech."
+    lead="Hledáme seniory do datových, integračních, AI a webových projektů i do týmů u klientů. Studentům a juniorům nabízíme placené stáže v SEBIT Academy." />
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-jobs">
+    <div class="w-wrap">
+      <div class="w-head w-head--row"><div><h2 class="w-h2" id="h-jobs">Otevřené pozice</h2></div><Ph>nahradit skutečnými pozicemi</Ph></div>
+      <ul class="w-roles" style="list-style:none">
+        {jobs.map(([t, m]) => <li class="w-role"><div><div class="w-role__name">{t}</div><div class="w-role__area">{m}</div></div><a class="kit-btn kit-btn--ghost kit-btn--sm" href={`/kontakt/?need=academy&role=${encodeURIComponent(t)}`}>Mám zájem</a></li>)}
+      </ul>
+    </div>
+  </section>
+  <section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-academy">
+    <div class="w-wrap w-split w-split--even">
+      <div class="w-stack">
+        <img src="/assets/logos/sebit_academy_dark.svg" alt="SEBIT Academy" width="163" height="56" style="height:56px;width:auto;align-self:flex-start;margin-left:-12px" />
+        <h2 class="w-h2" id="h-academy">Placená stáž na reálném projektu. S mentorem.</h2>
+        <p class="w-lead">Stáže v délce 3–6 měsíců pro studenty VŠ a VOŠ. Každý stážista má osobního mentora a pracuje na skutečném projektu, ne jen na podpoře.</p>
+        <ul class="w-checks">
+          <li><Icon name="i-check-circle" /><span>Reálné projekty, ne jen podpora</span></li>
+          <li><Icon name="i-check-circle" /><span>Osobní mentor z praxe</span></li>
+          <li><Icon name="i-check-circle" /><span>Možnost pokračovat i po studiu</span></li>
+        </ul>
+        <div><a class="kit-btn kit-btn--lime kit-btn--lg" href="/kontakt/?need=academy">Přihlásit se na stáž</a></div>
+      </div>
+      <div class="w-media w-media--navy"><img src="/favicon.svg" alt="" /><span>Dokumentární foto stážistů <Ph>foto</Ph></span></div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,44 @@
+---
+import { heroReports } from '../data/reports';
+import { reportHtml } from '../lib/report';
+const tabs = [['obchod', 'Obchod'], ['provoz', 'Provoz'], ['finance', 'Finance']] as const;
+---
+<figure class="w-dash w-on-navy" aria-labelledby="dash-cap" style="margin:0">
+  <div class="w-dash__top">
+    <div>
+      <div class="w-dash__title" id="dash-cap">Přehled pro vedení · listopad</div>
+      <div class="w-dash__meta">Obchod, provoz a finance na jednom místě</div>
+    </div>
+    <span class="w-badge">Ukázková data</span>
+  </div>
+  <div class="w-tabs" role="tablist" aria-label="Pohled reportu" data-hero-tabs>
+    {tabs.map(([k, l], i) => (
+      <button type="button" role="tab" id={`tab-${k}`} aria-controls="rep-hero" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-key={k}>{l}</button>
+    ))}
+  </div>
+  <div class="w-rep" id="rep-hero" role="tabpanel" aria-labelledby="tab-obchod" aria-live="polite" set:html={reportHtml(heroReports.obchod, heroReports.obchod.sel)} />
+</figure>
+<script>
+  import { heroReports } from '../data/reports';
+  import { bindReport } from '../lib/report';
+  const el = document.getElementById('rep-hero');
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-hero-tabs] [role="tab"]'));
+  if (el) {
+    let key = 'obchod' as keyof typeof heroReports;
+    bindReport(el, () => heroReports[key]);
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => {
+        tabs.forEach((x) => { x.setAttribute('aria-selected', String(x === t)); x.tabIndex = x === t ? 0 : -1; });
+        key = t.dataset.key as keyof typeof heroReports;
+        el.setAttribute('aria-labelledby', t.id);
+        (el as HTMLElement & { resetReport?: () => void }).resetReport?.();
+      });
+      t.addEventListener('keydown', (e) => {
+        const n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!n) return;
+        const nx = tabs[(i + n + tabs.length) % tabs.length];
+        nx.focus(); nx.click();
+      });
+    });
+  }
+</script>

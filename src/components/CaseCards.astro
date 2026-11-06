@@ -1,0 +1,14 @@
+---
+import Ph from './Ph.astro';
+import { cases } from '../data/site';
+---
+<div class="w-grid w-grid--2">
+  {cases.map((c) => (
+    <article class="w-case">
+      <div class="w-case__meta"><span class="w-badge w-badge--light">{c.sector}</span> <Ph>{c.service}</Ph></div>
+      <h3 class="w-h3">{c.client}</h3>
+      <p class="w-small">{c.text}</p>
+      <div class="w-case__kpis"><div><b><Ph>X</Ph></b><span>měřitelný výsledek</span></div><div><b><Ph>X</Ph></b><span>měsíců spolupráce</span></div></div>
+    </article>
+  ))}
+</div>

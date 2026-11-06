@@ -1,10 +1,19 @@
 {
   "name": "sebit-web",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "SEBIT Solutions s.r.o. — static website",
+  "type": "module",
+  "description": "SEBIT Solutions s.r.o. — web sebit.cz (Astro, SEBIT Design System)",
   "scripts": {
-    "dev": "npx -y live-server --port=3000 --no-browser --quiet",
-    "preview": "npx -y live-server --port=3000"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:placeholders": "node scripts/check-placeholders.mjs"
+  },
+  "dependencies": {
+    "astro": "5.18.2"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

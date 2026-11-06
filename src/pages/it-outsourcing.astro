@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Ph from '../components/Ph.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Models from '../components/Models.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { roles, roleAreas } from '../data/site';
+const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] === a.area).length }));
+---
+<Base title="IT outsourcing: specialisté, týmy a projekty na klíč" description="Kapacitní outsourcing IT ve třech modelech: IT specialista do týmu (T&M), tým na míru (team leasing) a projekt na klíč. Katalog 24 rolí.">
+  <PageHero crumbs={[{ href: '/co-delame/', label: 'Co děláme' }, { label: 'IT outsourcing' }]}
+    title="IT specialista, celý tým, nebo hotový projekt."
+    lead="Kapacitní outsourcing ve třech modelech, se stejnými lidmi a stejnou kvalitou. Liší se tím, kdo řídí práci a kdo nese riziko dodávky." />
+
+  <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-labelledby="h-models">
+    <div class="w-wrap">
+      <h2 class="w-h2" id="h-models" style="margin-bottom:var(--sb-size-8)">Který model vám sedí</h2>
+      <Models />
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" style="padding-top:0" aria-labelledby="h-compare">
+    <div class="w-wrap">
+      <h2 class="w-h2" id="h-compare" style="margin-bottom:var(--sb-size-8)">Porovnání modelů</h2>
+      <div class="w-table-wrap" tabindex="0" role="region" aria-labelledby="h-compare">
+        <table class="w-table">
+          <thead><tr><th scope="col">Kritérium</th><th scope="col">IT specialista (T&amp;M)</th><th scope="col">Team leasing</th><th scope="col">Projekt na klíč (FT&amp;FP)</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Hodí se, když</th><td>Chybí vám konkrétní role nebo kapacita</td><td>Potřebujete celý tým, ale řízení chcete mít u sebe</td><td>Máte jasný rozsah a chcete garantovaný výsledek</td></tr>
+            <tr><th scope="row">Řízení práce</th><td>Vaše</td><td>Vaše, s naším team leadem</td><td>Naše, včetně projektového řízení</td></tr>
+            <tr><th scope="row">Riziko dodávky</th><td>Na vaší straně</td><td>Sdílené</td><td>Na naší straně, smluvní záruky</td></tr>
+            <tr><th scope="row">Cena</th><td>MD sazba <Ph>od X Kč</Ph></td><td>Měsíční cena týmu</td><td>Pevná cena po analýze</td></tr>
+            <tr><th scope="row">Výkazy</th><td>Průběžně, v reálném čase</td><td>Průběžně, v reálném čase</td><td>Report po milnících, výkazy na vyžádání</td></tr>
+            <tr><th scope="row">Minimální délka</th><td><Ph>X měsíců</Ph></td><td><Ph>X měsíců</Ph></td><td>Podle projektu</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-surface" id="katalog" aria-labelledby="h-catalog">
+    <div class="w-wrap">
+      <div class="w-head">
+        <Eyebrow>Katalog rolí</Eyebrow>
+        <h2 class="w-h2" id="h-catalog">Najděte roli, kterou potřebujete.</h2>
+        <p class="w-body">Kliknutím na Poptat se role předvyplní do poptávky.</p>
+      </div>
+      <div class="w-catalog-tools">
+        <div class="w-search">
+          <label class="sr-only" for="role-q">Hledat roli</label>
+          <Icon name="i-search" />
+          <input class="w-input" id="role-q" type="search" placeholder="Např. Power BI, analytik, DevOps" autocomplete="off" />
+        </div>
+        <div class="w-picker" id="role-areas" role="group" aria-label="Filtrovat podle oblasti" style="margin:0">
+          <button class="w-chip" type="button" aria-pressed="true" data-area="">Vše <span class="w-count">{roles.length}</span></button>
+          {areaCounts.map((a) => <button class="w-chip" type="button" aria-pressed="false" data-area={a.area}>{a.area} <span class="w-count">{a.n}</span></button>)}
+        </div>
+      </div>
+      <p class="w-small" id="role-count" aria-live="polite" style="margin-bottom:var(--sb-size-4)">{roles.length} rolí</p>
+      <ul class="w-roles" id="role-list" style="list-style:none">
+        {roles.map(([r, a]) => (
+          <li class="w-role" data-area={a}><div><div class="w-role__name">{r}</div><div class="w-role__area">{a}</div></div>
+            <a class="kit-btn kit-btn--ghost kit-btn--sm" href={`/kontakt/?need=outsourcing&role=${encodeURIComponent(r)}`}>Poptat</a></li>
+        ))}
+      </ul>
+      <p class="w-empty" id="role-empty" hidden>Žádná role neodpovídá hledání. Zkuste obecnější výraz, nebo nám roli popište v <a href="/kontakt/?need=outsourcing">poptávce</a>.</p>
+    </div>
+  </section>
+
+  <section class="w-section w-ground-page" aria-labelledby="h-faq-s">
+    <div class="w-wrap w-split">
+      <div class="w-stack w-sticky"><h2 class="w-h2" id="h-faq-s">Časté otázky</h2><p class="w-body">Odpovědi, které od nás nákup a právní oddělení chtějí nejčastěji.</p></div>
+      <div class="w-faq">
+        <details><summary>Jak rychle může specialista nastoupit? <Icon name="i-chevron-down" /></summary><div><p>Profily kandidátů posíláme obvykle <Ph>do X pracovních dnů</Ph>. Nástup závisí na výpovědní lhůtě a bezpečnostních prověrkách na vaší straně.</p></div></details>
+        <details><summary>Jak ověřujete senioritu kandidátů? <Icon name="i-chevron-down" /></summary><div><p>Každého kandidáta technicky prověří náš senior ze stejné oblasti. <Ph>popsat proces</Ph></p></div></details>
+        <details><summary>Co když specialista nebude sedět? <Icon name="i-chevron-down" /></summary><div><p>Zajistíme náhradu. <Ph>garance náhrady do X dnů</Ph></p></div></details>
+        <details><summary>Podepíšete NDA a doložíte podklady pro výběr dodavatele? <Icon name="i-chevron-down" /></summary><div><p>Ano. NDA podepisujeme před sdílením detailů projektu a jsme připraveni doložit podklady pro due diligence dodavatele. <Ph>doplnit: pojištění odpovědnosti, certifikace</Ph></p></div></details>
+      </div>
+    </div>
+  </section>
+  <CtaBand cta="Poptat specialistu" href="/kontakt/?need=outsourcing" />
+</Base>
+<script>
+  const q = document.getElementById('role-q') as HTMLInputElement | null;
+  const areaBox = document.getElementById('role-areas');
+  const items = Array.from(document.querySelectorAll<HTMLLIElement>('#role-list .w-role'));
+  const count = document.getElementById('role-count');
+  const empty = document.getElementById('role-empty');
+  let area = '';
+  const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const word = (n: number) => (n === 1 || (n >= 2 && n <= 4) ? 'role' : 'rolí');
+  function apply() {
+    const t = norm(q?.value.trim() ?? '');
+    let n = 0;
+    items.forEach((li) => {
+      const ok = (!area || li.dataset.area === area) && (!t || norm(li.textContent ?? '').includes(t));
+      li.hidden = !ok; if (ok) n++;
+    });
+    if (count) count.textContent = `${n} ${word(n)}${area ? ` v oblasti ${area}` : ''}`;
+    if (empty) empty.hidden = n > 0;
+  }
+  areaBox?.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-area]');
+    if (!b) return;
+    area = b.dataset.area ?? '';
+    areaBox.querySelectorAll('[data-area]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    apply();
+  });
+  q?.addEventListener('input', apply);
+</script>

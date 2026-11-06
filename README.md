@@ -1,47 +1,56 @@
-# SEBIT Solutions Web
+# sebit.cz
 
-Tento repozitář obsahuje statickou webovou prezentaci společnosti SEBIT Solutions s.r.o., zaměřenou na IT consulting, bodyshopping, team leasing a vývoj moderních webových řešení.
+Web SEBIT Solutions s.r.o. — informace pro rozhodování provozu a financí, data, integrace (SEBIT Gateway), AI, weby a kapacitní outsourcing IT.
 
-## Struktura projektu
+## Stack
 
-- `index.html` – Hlavní stránka s přehledem služeb a odkazem na jednotlivé divize.
-- `Academy/`, `Medical/`, `labs/`, `solutions/`, `jira/` – Podstránky jednotlivých divizí (každá má vlastní `index.html`).
-- `manifest/`, `timeline/`, `privacy/`, `shared/` – Další stránky a sdílené prvky.
-- `SEBIT Design System/` – Design system webu (tokeny, komponenty, zdrojový snapshot).
-- `favicon_rounded.png`, `favicon_arrow.svg` – Favicony a loga.
-- `sebit_*_light.svg`, `sebit_*_dark.svg` – Loga jednotlivých divizí.
-- `brand_guidelines.md` – Pravidla pro používání značky.
-- `CNAME` – Nastavení vlastní domény pro GitHub Pages.
+- **Astro 5**, statický výstup, bez klientského frameworku. JavaScript jen tam, kde je interakce (report, katalog rolí, formulář, menu).
+- **SEBIT Design System**: tokeny, kity, font Inter, loga a ikony jsou zkopírované z repozitáře [`sebit-design`](https://github.com/SEBIT-Solutions/sebit-design) (stav `main` 7a51eb0). Nic z toho se needituje ručně, viz níže.
+- **GitHub Pages** přes GitHub Actions (`.github/workflows/deploy.yml`), doména `www.sebit.cz` (`public/CNAME`).
 
-## Technologie
+## Příkazy
 
-- **HTML5** – Statické stránky.
-- **Tailwind CSS** (CDN) – Rychlé stylování a responzivní design.
-- **AOS (Animate On Scroll)** – Animace při scrollování.
-- **Font Awesome** – Ikony.
-- **JavaScript** – Interaktivita (mobilní menu, dynamický rok ve footeru, rozbalovací sekce "Zjistit více").
+```bash
+npm ci
+npm run dev                  # http://localhost:4321
+npm run build                # → dist/
+npm run preview              # náhled produkčního buildu
+npm run check:placeholders   # seznam faktů, které je potřeba doplnit (po buildu)
+```
 
-## Spuštění
+Kontrola proti pravidlům design systemu (vyžaduje vedle naklonovaný `sebit-design`):
 
-Web je statický, není potřeba žádný build proces. Stačí otevřít `index.html` v prohlížeči nebo nasadit na libovolný webhosting (např. GitHub Pages).
+```bash
+node ../sebit-design/ai/check.cjs src/pages src/components src/layouts src/styles/web.css src/lib src/data
+```
+
+## Struktura
+
+| Cesta | Obsah |
+|---|---|
+| `src/pages/` | stránky; URL = cesta souboru (`co-delame/[slug].astro` generuje 4 stránky oblastí) |
+| `src/data/site.ts` | firma, oblasti, detaily oblastí, role, klienti, manifest, typy poptávky — **texty měňte tady** |
+| `src/data/reports.ts` | ukázková data interaktivních reportů (vždy označená „Ukázková data“) |
+| `src/components/` | sdílené bloky (hlavička a patička jsou v `src/layouts/Base.astro`) |
+| `src/lib/report.ts` | vykreslení reportu — stejný kód při buildu i v prohlížeči |
+| `src/styles/ds/` | **vendor** kopie SEBIT DS (`tokens.css`, `bundle.css`, `button_kit.css`, `icon_kit.css`, fonty) |
+| `src/styles/web.css` | styly webu, jen přes tokeny `--sb-*`, prefix `.w-` |
+| `public/` | statické soubory; staré obrázky v kořeni zůstávají na původních URL (odkazují na ně e-mailové podpisy) |
+| `public/timeline/`, `public/jira/` | interní nástroje, beze změny, v `robots.txt` zakázané |
+
+## Pravidla
+
+- Barvy, velikosti písma, rádiusy a stíny jen přes tokeny `--sb-*`. Loga jako `<img>` ze `/assets/logos/`, ikony ze sprite `/assets/icons/`.
+- Fakt, který ještě není potvrzený, obalte `<Ph>…</Ph>` — zobrazí se žlutě a objeví se v `npm run check:placeholders`.
+- Limetková: signet + jeden prvek na obrazovku (návrh DECISIONS #27 v `sebit-design`).
+- Staré URL (`/solutions`, `/manifest`, `/labs`, `/Academy`, `/Medical`, `/privacy`) přesměrovává `astro.config.mjs`.
 
 ## Nasazení
 
-- Hosting: **GitHub Pages** z větve `main` (root), bez build kroku. Každý push do `main` = produkční deploy.
-- Doména: `sebit.cz` (soubor `CNAME`), doména je ověřená v organizaci `SEBIT-Solutions`.
-- DNS (web4u.cz): apex `A` 185.199.108–111.153 + `AAAA` 2606:50c0:8000–8003::153, `www` → `CNAME sebit-solutions.github.io.`
-- Změny dělej přes PR do `main`.
+Push do `main` spustí build a nasazení na GitHub Pages. V nastavení repozitáře musí být **Settings → Pages → Source: GitHub Actions** (jednorázově).
 
-## Úpravy
-
-- Pro změnu obsahu upravte příslušné HTML soubory.
-- Pro změnu stylů lze upravit Tailwind konfiguraci v `<script>` v `<head>`.
-
-## Kontakt
-
-- Web: [https://www.sebit.cz/](https://www.sebit.cz/)
-- E-mail: info@sebit.cz
+DNS (web4u.cz): apex `A` 185.199.108–111.153 + `AAAA` 2606:50c0:8000–8003::153, `www` → `CNAME sebit-solutions.github.io.`
 
 ---
 
-© SEBIT Solutions s.r.o.
+© SEBIT Solutions s.r.o. · info@sebit.cz

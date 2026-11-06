@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import HeroReport from '../components/HeroReport.astro';
-import QuestionPicker from '../components/QuestionPicker.astro';
 import CapabilityGrid from '../components/CapabilityGrid.astro';
 import CaseCards from '../components/CaseCards.astro';
 import Partner from '../components/Partner.astro';
@@ -28,34 +27,23 @@ import { sectors, roles } from '../data/site';
         </div>
         <HeroReport />
       </div>
-      <dl class="w-hero__proof">
-        <div class="w-stat"><dt class="w-stat__l">oblastí od dat po weby a IT kapacity</dt><dd class="w-stat__n">6</dd></div>
-        <div class="w-stat"><dt class="w-stat__l">rolí v katalogu IT specialistů</dt><dd class="w-stat__n">{roles.length}</dd></div>
-        <div class="w-stat"><dt class="w-stat__l">nejdéle trvá reakce na kritický požadavek</dt><dd class="w-stat__n">4 h</dd></div>
-      </dl>
+      <div class="w-hero__foot">
+        <dl class="w-hero__proof">
+          <div class="w-stat"><dt class="w-stat__l">oblastí od dat po weby a IT kapacity</dt><dd class="w-stat__n">6</dd></div>
+          <div class="w-stat"><dt class="w-stat__l">rolí v katalogu IT specialistů</dt><dd class="w-stat__n">{roles.length}</dd></div>
+          <div class="w-stat"><dt class="w-stat__l">nejdéle trvá reakce na kritický požadavek</dt><dd class="w-stat__n">4 h</dd></div>
+        </dl>
+        <a class="w-scroll" href="#obory" aria-label="Pokračovat dolů na obsah stránky"><span class="w-scroll__ring"><Icon name="i-chevron-down" /></span>Dál</a>
+      </div>
     </div>
   </section>
 
-  <section class="w-section--tight w-ground-page" aria-labelledby="h-clients">
+  <section class="w-section--tight w-ground-page" id="obory" aria-labelledby="h-clients" style="scroll-margin-top:var(--w-header-h)">
     <div class="w-wrap w-logobar">
       <p class="w-small" id="h-clients"><b class="w-strong">Pracujeme pro firmy z oborů</b><br />jména uvádíme se souhlasem klientů</p>
       <ul class="w-clients">
         {sectors.map((c) => <li class="w-client w-client--sector"><b>{c}</b></li>)}
       </ul>
-    </div>
-  </section>
-
-  <section class="w-section w-ground-page" aria-labelledby="h-q" style="padding-top:var(--sb-size-8)">
-    <div class="w-wrap">
-      <div class="w-head w-head--row">
-        <div>
-          <Eyebrow>Informace pro rozhodování</Eyebrow>
-          <h2 class="w-h2" id="h-q">Na jaké otázky dostanete odpověď do rána. Vyzkoušejte si to.</h2>
-        </div>
-        <p class="w-body">Klikněte na otázku a report vedle se překreslí. Data už máte v ERP, účetnictví, skladu a tabulkách — my je propojíme a dáme každému, kdo rozhoduje, přehled, kterému se dá věřit.</p>
-      </div>
-      <QuestionPicker />
-      <div style="margin-top:var(--sb-size-8)"><a class="w-link" href="/co-delame/reporting-a-data/">Jak stavíme datovou platformu a reporting <Icon name="i-arrow-right" /></a></div>
     </div>
   </section>
 
@@ -97,7 +85,7 @@ import { sectors, roles } from '../data/site';
           <Eyebrow>Kapacitní outsourcing IT</Eyebrow>
           <h2 class="w-h2" id="h-models">Potřebujete posílit tým? Vy rozhodnete, kdo řídí práci a kdo nese riziko.</h2>
         </div>
-        <p class="w-body">Stejní lidé, tři smluvní rámce. Vyberte, co potřebujete vyřešit — ukážeme, který model sedí nejlépe.</p>
+        <p class="w-body">Stejní lidé, tři smluvní rámce. Klikněte na kartu podle toho, co potřebujete vyřešit, a porovnejte, kdo řídí práci a kdo nese riziko.</p>
       </div>
       <Models />
     </div>
@@ -118,11 +106,11 @@ import { sectors, roles } from '../data/site';
     </div>
   </section>
 
-  <section class="w-section w-ground-navy w-on-navy" aria-labelledby="h-why">
+  <section class="w-section w-ground-page" aria-labelledby="h-why">
     <div class="w-wrap">
       <div class="w-head w-head--row">
         <div>
-          <Eyebrow signet={false}>Manifest spolupracovníka</Eyebrow>
+          <Eyebrow>Manifest spolupracovníka</Eyebrow>
           <h2 class="w-h2" id="h-why">Sedm pravidel, podle kterých nás můžete měřit.</h2>
         </div>
         <a class="w-link" href="/o-nas/#manifest">Celý manifest <Icon name="i-arrow-right" /></a>
@@ -135,7 +123,7 @@ import { sectors, roles } from '../data/site';
     </div>
   </section>
 
-  <section class="w-section w-ground-page" aria-labelledby="h-ref">
+  <section class="w-section w-ground-surface" aria-labelledby="h-ref">
     <div class="w-wrap w-stack-lg">
       <div class="w-head w-head--row" style="margin-bottom:0">
         <div>
@@ -149,16 +137,16 @@ import { sectors, roles } from '../data/site';
     </div>
   </section>
 
-  <section class="w-section w-ground-navy-strong w-on-navy" aria-labelledby="h-eco">
+  <section class="w-section w-ground-page" aria-labelledby="h-eco">
     <div class="w-wrap">
       <div class="w-head">
-        <Eyebrow signet={false}>SEBIT Group</Eyebrow>
+        <Eyebrow>SEBIT Group</Eyebrow>
         <h2 class="w-h2" id="h-eco">Za námi stojí laboratoř a vlastní akademie.</h2>
         <p class="w-lead">Proto víme, kde brát lidi, a nové technologie zkoušíme dřív, než je nasadíme u vás.</p>
       </div>
       <div class="w-eco">
-        <a class="w-eco__i" href="/co-delame/ai/"><img src="/assets/logos/sebit_labs_dark.svg" alt="SEBIT Labs" width="84" height="30" /><p>Prototypy a proof of concept za týdny. AI a LLM v podnikových procesech, cloud-native, IoT.</p></a>
-        <a class="w-eco__i" href="/kariera/"><img src="/assets/logos/sebit_academy_dark.svg" alt="SEBIT Academy" width="84" height="30" /><p>Placené stáže, kurzy a junior talent pipeline. Lidé, které známe dřív, než nastoupí k vám.</p></a>
+        <a class="w-eco__i" href="/co-delame/ai/"><img src="/assets/logos/sebit_labs_light.svg" alt="SEBIT Labs" width="84" height="30" /><p>Prototypy a proof of concept za týdny. AI a LLM v podnikových procesech, cloud-native, IoT.</p></a>
+        <a class="w-eco__i" href="/kariera/"><img src="/assets/logos/sebit_academy_light.svg" alt="SEBIT Academy" width="84" height="30" /><p>Placené stáže, kurzy a junior talent pipeline. Lidé, které známe dřív, než nastoupí k vám.</p></a>
       </div>
     </div>
   </section>

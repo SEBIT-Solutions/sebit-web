@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
-import { company, needs, sla } from '../data/site';
+import { company, needs, sla, contactEndpoint } from '../data/site';
 ---
 <Base title="Poptávka a kontakt" description="Popište nám, co potřebujete vědět, propojit nebo obsadit. info@sebit.cz · +420 721 405 384." noStickyCta>
   <PageHero crumbs={[{ label: 'Kontakt' }]} title="Řekněte nám, co potřebujete."
@@ -10,7 +10,8 @@ import { company, needs, sla } from '../data/site';
   <section class="w-section w-ground-page" style="padding-top:var(--sb-size-12)" aria-label="Poptávkový formulář">
     <div class="w-wrap w-split w-split--wide-left">
       <div>
-        <form class="w-form" id="brief" novalidate>
+        <form class="w-form" id="brief" novalidate data-endpoint={contactEndpoint}>
+          <div class="w-hp" aria-hidden="true"><label for="f-web">Nevyplňujte</label><input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
           <fieldset class="w-fieldset">
             <legend class="w-legend"><span class="w-mono">1/4</span>Co potřebujete?</legend>
             <div class="w-options">
@@ -24,8 +25,6 @@ import { company, needs, sla } from '../data/site';
             <div class="w-fields">
               <div class="w-field w-span2"><label for="f-role">Role nebo téma <span class="w-opt-tag">(volitelné)</span></label><input class="w-input" id="f-role" name="role" type="text" placeholder="Např. Power BI reporting pro vedení, Senior Business Analyst" /></div>
               <div class="w-field"><label for="f-when">Kdy začít</label><select class="w-input w-select" id="f-when" name="when"><option>Co nejdříve</option><option>Do měsíce</option><option>Za 1–3 měsíce</option><option>Zatím zjišťuji možnosti</option></select></div>
-              <div class="w-field w-span2"><label for="f-urg">Naléhavost</label><select class="w-input w-select" id="f-urg" name="urg"><option value="standard">Standardní — odpověď {sla.standard}</option><option value="critical">Kritická — odpověď {sla.critical}</option></select></div>
-              <div class="w-field"><label for="f-len">Předpokládaná délka</label><select class="w-input w-select" id="f-len" name="len"><option>Do 3 měsíců</option><option selected>3–12 měsíců</option><option>Déle než rok</option><option>Nevím</option></select></div>
             </div>
           </fieldset>
           <fieldset class="w-fieldset">
@@ -41,14 +40,18 @@ import { company, needs, sla } from '../data/site';
             <legend class="w-legend"><span class="w-mono">4/4</span>Cokoliv dalšího</legend>
             <div class="w-field"><label for="f-msg">Zpráva <span class="w-opt-tag">(volitelné)</span></label><textarea class="w-textarea" id="f-msg" name="msg" placeholder="Systémy, data, velikost týmu, omezení, termíny…"></textarea><span class="w-help">Neposílejte prosím důvěrné informace. NDA rádi podepíšeme před detailní diskusí.</span></div>
           </fieldset>
-          <p class="w-consent">Po odeslání se otevře váš e-mailový program s předvyplněnou zprávou pro {company.email} — odešlete ji odtud. Údaje zpracujeme jen pro odpověď na poptávku, viz <a href="/ochrana-osobnich-udaju/">zásady ochrany osobních údajů</a>.</p>
-          <div><button class="kit-btn kit-btn--primary kit-btn--lg" type="submit">Odeslat zprávu <Icon name="i-arrow-right" /></button></div>
+          <p class="w-consent">Poptávka přijde rovnou nám na {company.email}. Údaje zpracujeme jen pro odpověď na ni, viz <a href="/ochrana-osobnich-udaju/">zásady ochrany osobních údajů</a>.</p>
+          <div class="w-form-error" id="brief-err" role="alert" hidden>
+            <Icon name="i-alert" />
+            <p>Poptávku se nepodařilo odeslat. Zkuste to prosím znovu za chvíli, nebo nám ji pošlete e-mailem: <a id="brief-mailto" href={`mailto:${company.email}`}>otevřít předvyplněný e-mail</a>.</p>
+          </div>
+          <div><button class="kit-btn kit-btn--primary kit-btn--lg" type="submit" id="brief-send"><span>Odeslat poptávku</span> <Icon name="i-arrow-right" /></button></div>
         </form>
         <div class="w-success" id="brief-ok" hidden tabindex="-1" role="status">
           <Icon name="i-check-circle" />
-          <h2 class="w-h3">Zprávu máte připravenou v e-mailu.</h2>
-          <p>Odešlete ji z e-mailového programu, který se právě otevřel. Pokud se neotevřel, napište nám přímo na <b>{company.email}</b>. Ozveme se {sla.standard}, s kritickým požadavkem {sla.critical}.</p>
-          <div><button class="kit-btn kit-btn--ghost" type="button" id="brief-reset">Upravit poptávku</button></div>
+          <h2 class="w-h3">Děkujeme, poptávka dorazila.</h2>
+          <p>Přečte ji člověk a ozveme se {sla.standard}, v praxi obvykle dřív. Odpovíme na e-mail <b id="brief-ok-mail"></b>. Spěcháte? Zavolejte na <a href={`tel:${company.phoneHref}`}>{company.phone}</a>.</p>
+          <div><button class="kit-btn kit-btn--ghost" type="button" id="brief-reset">Poslat další poptávku</button></div>
         </div>
       </div>
       <aside class="w-aside w-sticky" aria-label="Přímý kontakt">
@@ -57,7 +60,7 @@ import { company, needs, sla } from '../data/site';
           <div><dt>E-mail</dt><dd><a href={`mailto:${company.email}`}>{company.email}</a><button class="w-copy" type="button" data-copy={company.email}>Kopírovat</button></dd></div>
           <div><dt>Telefon</dt><dd><a href={`tel:${company.phoneHref}`}>{company.phone}</a><button class="w-copy" type="button" data-copy={company.phoneHref}>Kopírovat</button></dd></div>
           <div><dt>Sídlo</dt><dd class="w-aside__addr">{company.street}, {company.city}</dd></div>
-          <div><dt>Jak rychle odpovídáme</dt><dd class="w-aside__addr">Standardně {sla.standard}<br />Kritické požadavky {sla.critical}</dd></div>
+          <div><dt>Jak rychle odpovídáme</dt><dd class="w-aside__addr">{sla.standard}, v praxi obvykle dřív</dd></div>
         </dl>
         <div class="w-stack w-aside__next">
           <h3 class="w-h4">Co se stane po odeslání</h3>
@@ -88,23 +91,15 @@ import { company, needs, sla } from '../data/site';
     input.setAttribute('aria-invalid', bad ? 'true' : 'false');
     const e = $(errId); if (e) e.hidden = !bad;
   }
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = $<HTMLInputElement>('f-name')!, mail = $<HTMLInputElement>('f-mail')!;
-    const badName = !name.value.trim();
-    const badMail = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim());
-    setErr(name, 'e-name', badName); setErr(mail, 'e-mail', badMail);
-    if (badName) { name.focus(); return; }
-    if (badMail) { mail.focus(); return; }
-    const fd = new FormData(form);
-    const needEl = form.querySelector<HTMLInputElement>('input[name="need"]:checked');
-    const label = needEl?.dataset.label ?? '';
+  const loadedAt = Date.now();
+  const err = $('brief-err');
+  const send = $<HTMLButtonElement>('brief-send');
+
+  function summary(fd: FormData, label: string) {
     const lines = [
       `Co potřebuji: ${label}`,
       fd.get('role') ? `Role nebo téma: ${fd.get('role')}` : '',
       `Kdy začít: ${fd.get('when')}`,
-      `Předpokládaná délka: ${fd.get('len')}`,
-      `Naléhavost: ${critical ? 'kritická' : 'standardní'}`,
       '',
       `Jméno: ${fd.get('name')}`,
       `E-mail: ${fd.get('email')}`,
@@ -112,14 +107,51 @@ import { company, needs, sla } from '../data/site';
       fd.get('tel') ? `Telefon: ${fd.get('tel')}` : '',
       '',
       String(fd.get('msg') ?? ''),
-    ].filter((l, i, a) => l !== '' || (a[i - 1] ?? '') !== '');
-    const critical = fd.get('urg') === 'critical';
-    const subject = `${critical ? '[KRITICKÉ] ' : ''}Poptávka z webu: ${label}${fd.get('org') ? ` — ${fd.get('org')}` : ''}`;
-    window.location.href = `mailto:info@sebit.cz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
-    form.hidden = true;
-    if (ok) { ok.hidden = false; ok.focus(); }
+    ];
+    return lines.filter((l, i, a) => l !== '' || (a[i - 1] ?? '') !== '').join('\n');
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = $<HTMLInputElement>('f-name')!, mail = $<HTMLInputElement>('f-mail')!;
+    const badName = !name.value.trim();
+    const badMail = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim());
+    setErr(name, 'e-name', badName); setErr(mail, 'e-mail', badMail);
+    if (badName) { name.focus(); return; }
+    if (badMail) { mail.focus(); return; }
+
+    const fd = new FormData(form);
+    const label = form.querySelector<HTMLInputElement>('input[name="need"]:checked')?.dataset.label ?? '';
+    const payload = {
+      need: label, role: fd.get('role'), when: fd.get('when'), name: fd.get('name'), email: fd.get('email'),
+      org: fd.get('org'), tel: fd.get('tel'), msg: fd.get('msg'), website: fd.get('website'), t: Date.now() - loadedAt,
+    };
+    if (err) err.hidden = true;
+    if (send) { send.disabled = true; send.setAttribute('aria-busy', 'true'); send.querySelector('span')!.textContent = 'Odesílám…'; }
+    let sent = false;
+    try {
+      const r = await fetch(form.dataset.endpoint!, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+      sent = r.ok && (await r.json()).ok === true;
+    } catch { sent = false; }
+    if (send) { send.disabled = false; send.removeAttribute('aria-busy'); send.querySelector('span')!.textContent = 'Odeslat poptávku'; }
+
+    if (sent) {
+      const m = $('brief-ok-mail'); if (m) m.textContent = String(fd.get('email'));
+      form.hidden = true;
+      if (ok) { ok.hidden = false; ok.focus(); }
+      return;
+    }
+    // fallback: the visitor can still send the same text from their own mail client
+    const subject = `Poptávka z webu: ${label}${fd.get('org') ? ` — ${fd.get('org')}` : ''}`;
+    const link = $<HTMLAnchorElement>('brief-mailto');
+    if (link) link.href = `mailto:info@sebit.cz?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary(fd, label))}`;
+    if (err) { err.hidden = false; err.focus?.(); }
   });
-  $('brief-reset')?.addEventListener('click', () => { if (form) form.hidden = false; if (ok) ok.hidden = true; $<HTMLInputElement>('f-name')?.focus(); });
+  $('brief-reset')?.addEventListener('click', () => {
+    if (form) { form.reset(); form.hidden = false; }
+    if (ok) ok.hidden = true;
+    $<HTMLInputElement>('f-name')?.focus();
+  });
 
   document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(b.dataset.copy ?? ''); b.textContent = 'Zkopírováno'; }

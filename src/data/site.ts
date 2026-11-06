@@ -18,6 +18,9 @@ export const company = {
 };
 
 // Response times promised on the site (owner, 2026-11-06).
+// Contact form endpoint: Supabase Edge Function `contact` (supabase/functions/contact) → Resend → info@sebit.cz.
+export const contactEndpoint = 'https://lguawicjrdzchwbwwmlf.supabase.co/functions/v1/contact';
+
 export const sla = {
   standard: 'do 2 pracovních dnů',
   critical: 'do 4 hodin',

@@ -2,3 +2,9 @@ node_modules/
 dist/
 .astro/
 .DS_Store
+
+# brand files copied from the SEBIT Design System release by scripts/sync-ds-assets.mjs
+public/assets/logos/
+public/assets/icons/
+public/assets/favicon/
+public/assets/og/

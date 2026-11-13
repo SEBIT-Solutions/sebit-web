@@ -34,7 +34,7 @@ const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] ===
         {specialists.map((p) => (
           <div class="w-stack" style="gap:var(--sb-size-3)">
             <Person name={p.name} role={p.role} email={p.email} />
-            <a class="kit-btn kit-btn--ghost kit-btn--sm" style="align-self:flex-start" href={`/kontakt/?need=outsourcing&role=${encodeURIComponent(`${p.catalog} (${p.name})`)}`}>Poptat</a>
+            <a class="sb-button sb-button--ghost sb-button--sm" style="align-self:flex-start" href={`/kontakt/?need=outsourcing&role=${encodeURIComponent(`${p.catalog} (${p.name})`)}`}>Poptat</a>
           </div>
         ))}
       </div>
@@ -83,7 +83,7 @@ const areaCounts = roleAreas.map((a) => ({ ...a, n: roles.filter((r) => r[1] ===
       <ul class="w-roles" id="role-list" style="list-style:none">
         {roles.map(([r, a]) => (
           <li class="w-role" data-area={a}><div><div class="w-role__name">{r}</div><div class="w-role__area">{a}</div></div>
-            <a class="kit-btn kit-btn--ghost kit-btn--sm" href={`/kontakt/?need=outsourcing&role=${encodeURIComponent(r)}`}>Poptat</a></li>
+            <a class="sb-button sb-button--ghost sb-button--sm" href={`/kontakt/?need=outsourcing&role=${encodeURIComponent(r)}`}>Poptat</a></li>
         ))}
       </ul>
       <p class="w-empty" id="role-empty" hidden>Žádná role neodpovídá hledání. Zkuste obecnější výraz, nebo nám roli popište v <a href="/kontakt/?need=outsourcing">poptávce</a>.</p>

@@ -27,13 +27,13 @@ export function reportHtml(r: Report, sel: number): string {
   const plan = r.plan !== undefined ? `<div class="w-rc__plan" style="bottom:${pct(r, r.plan)}%"><span>${r.planName}</span></div>` : '';
   const xs = r.labels.map((l, i) => `<span${i === sel ? ' class="is-sel"' : ''}>${l}</span>`).join('');
   const src = r.src.map((x) => `<span>${x}</span>`).join('');
-  const arrow = `<svg class="sb-i" aria-hidden="true"><use href="${UI}i-arrow-right"/></svg>`;
+  const arrow = `<svg class="sb-icon" aria-hidden="true"><use href="${UI}i-arrow-right"/></svg>`;
   return `<dl class="w-kpis">${kpis}</dl>` +
     `<div><div class="w-rc__head"><span>${r.title}, ${r.unit}</span><span class="w-rc__hint">Klikněte na sloupec</span></div>` +
     `<div class="w-rc__plot">${grid}<div class="w-rc__bars">${bars}</div>${plan}</div>` +
     `<div class="w-rc__x">${xs}</div></div>` +
     `<div class="w-rc__detail">${detail}</div>` +
-    `<p class="w-rc__answer"><svg class="sb-i" aria-hidden="true"><use href="${UI}i-info"/></svg><span>${r.answer}</span></p>` +
+    `<p class="w-rc__answer"><svg class="sb-icon" aria-hidden="true"><use href="${UI}i-info"/></svg><span>${r.answer}</span></p>` +
     `<div class="w-dash__src">${src}${arrow}<span>Microsoft Fabric</span>${arrow}<span>Power BI</span><em>aktualizováno dnes v 6:00</em></div>`;
 }
 

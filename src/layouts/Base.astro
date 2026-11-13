@@ -1,8 +1,8 @@
 ---
-import '../styles/ds/tokens.css';
-import '../styles/ds/bundle.css';
-import '../styles/ds/button_kit.css';
-import '../styles/ds/icon_kit.css';
+// SEBIT Design System from the installed release (vendor/sebit/*.tgz): tokens + aliases +
+// self-hosted Inter, then the .sb-* component classes. web.css adds the site's own .w-* layout.
+import '@sebit/design-tokens/css';
+import '@sebit/react/styles.css';
 import '../styles/web.css';
 import Icon from '../components/Icon.astro';
 import { company } from '../data/site';
@@ -20,7 +20,7 @@ const { title, description, bare = false, noStickyCta = false, noindex = false }
 const fullTitle = bare ? title : `${title} | SEBIT Solutions`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site).href;
-const ogImage = new URL('/og.png', Astro.site).href;
+const ogImage = new URL('/assets/og/og_solutions.png', Astro.site).href;
 
 const nav = [
   { href: '/co-delame/', label: 'Co děláme' },
@@ -61,7 +61,7 @@ const year = new Date().getFullYear();
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
   {noindex && <meta name="robots" content="noindex" />}
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/assets/favicon/favicon_arrow.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon_rounded.png" type="image/png" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="cs_CZ" />
@@ -88,9 +88,9 @@ const year = new Date().getFullYear();
           {nav.map((n) => <li><a href={n.href} aria-current={n.href === current ? 'page' : undefined}>{n.label}</a></li>)}
         </ul>
       </nav>
-      <a class="kit-btn kit-btn--primary w-header__cta" href="/kontakt/">Probrat projekt</a>
+      <a class="sb-button sb-button--primary w-header__cta" href="/kontakt/">Probrat projekt</a>
       <button class="w-menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Otevřít menu">
-        <svg class="sb-i" aria-hidden="true"><use href="/assets/icons/_sebit-ui-icons.svg#i-menu" /></svg>
+        <svg class="sb-icon" aria-hidden="true"><use href="/assets/icons/_sebit-ui-icons.svg#i-menu" /></svg>
       </button>
     </div>
     <div class="w-mobile-nav" id="mnav" hidden>
@@ -99,7 +99,7 @@ const year = new Date().getFullYear();
           {nav.map((n) => <li><a href={n.href} aria-current={n.href === current ? 'page' : undefined}>{n.label} <Icon name="i-arrow-right" /></a></li>)}
           <li><a href="/kontakt/">Kontakt <Icon name="i-arrow-right" /></a></li>
         </ul>
-        <a class="kit-btn kit-btn--primary kit-btn--lg" href="/kontakt/">Probrat projekt</a>
+        <a class="sb-button sb-button--primary sb-button--lg" href="/kontakt/">Probrat projekt</a>
       </div>
     </div>
   </header>
@@ -152,7 +152,7 @@ const year = new Date().getFullYear();
   </footer>
 
   {!noStickyCta && (
-    <div class="w-sticky-cta" id="sticky-cta" aria-hidden="true"><a class="kit-btn kit-btn--primary kit-btn--lg" href="/kontakt/" tabindex="-1">Probrat projekt</a></div>
+    <div class="w-sticky-cta" id="sticky-cta" aria-hidden="true"><a class="sb-button sb-button--primary sb-button--lg" href="/kontakt/" tabindex="-1">Probrat projekt</a></div>
   )}
 
   <script>

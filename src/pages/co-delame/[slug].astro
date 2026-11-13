@@ -15,8 +15,8 @@ const contact = `/kontakt/?need=${d.need}`;
 <Base title={d.title} description={d.description}>
   <PageHero crumbs={[{ href: '/co-delame/', label: 'Co děláme' }, { label: d.name }]} title={d.h1} lead={d.lead}>
     <div class="w-hero__actions">
-      <a class="kit-btn kit-btn--primary kit-btn--lg" href={contact}>{d.cta}</a>
-      <a class="kit-btn kit-btn--ghost kit-btn--lg" href="/reference/">Reference</a>
+      <a class="sb-button sb-button--primary sb-button--lg" href={contact}>{d.cta}</a>
+      <a class="sb-button sb-button--ghost sb-button--lg" href="/reference/">Reference</a>
     </div>
   </PageHero>
 
@@ -65,7 +65,7 @@ const contact = `/kontakt/?need=${d.need}`;
           <h2 class="w-h3">{d.offer.t}</h2>
           <p>{d.offer.d} Pevný rozsah a cenu znáte předem.</p>
         </div>
-        <a class="kit-btn kit-btn--on-navy kit-btn--lg" href={contact}>{d.cta}</a>
+        <a class="sb-button sb-button--on-navy sb-button--lg" href={contact}>{d.cta}</a>
       </div>
     </div>
   </section>

@@ -1,5 +1,9 @@
 name: Build and deploy
 
+# PR: build + every check, including "this PR adds a new version and its CHANGELOG section".
+# Push to main (= a merge): the same, then deploy to GitHub Pages and tag v<version> with the
+# CHANGELOG section as the GitHub Release notes.
+
 on:
   push:
     branches: [main]
@@ -17,12 +21,24 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: CHANGELOG — mandatory new version in every PR
+        if: github.event_name == 'pull_request'
+        run: node scripts/changelog.mjs check --base "origin/${{ github.base_ref }}"
+      - name: CHANGELOG — format and version
+        if: github.event_name != 'pull_request'
+        run: npm run check:changelog
       - run: npm run build
+      - name: Design-system rules (checker from the installed release)
+        run: npm run lint:ds
+      - name: AGENTS.md carries the rules of the installed release
+        run: npm run check:agents
       - name: List content placeholders left before launch
         run: npm run check:placeholders
       - if: github.event_name != 'pull_request'
@@ -43,3 +59,23 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  release:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag v<version> with its CHANGELOG section
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v="v$(node -p "require('./package.json').version")"
+          if gh release view "$v" >/dev/null 2>&1; then
+            echo "$v already released — nothing to do"
+            exit 0
+          fi
+          node scripts/changelog.mjs notes > notes.md
+          gh release create "$v" --target "$GITHUB_SHA" --title "sebit.cz $v" --notes-file notes.md

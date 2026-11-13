@@ -1,16 +1,26 @@
 {
   "name": "sebit-web",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "SEBIT Solutions s.r.o. — web sebit.cz (Astro, SEBIT Design System)",
   "scripts": {
+    "predev": "node scripts/sync-ds-assets.mjs",
     "dev": "astro dev",
+    "prebuild": "node scripts/sync-ds-assets.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "check:placeholders": "node scripts/check-placeholders.mjs"
+    "lint:ds": "node node_modules/@sebit/design-tokens/dist/ai/check.cjs src/pages src/components src/layouts src/styles/web.css src/lib src/data",
+    "check:agents": "node scripts/sync-agents.mjs --check",
+    "sync:agents": "node scripts/sync-agents.mjs",
+    "check:placeholders": "node scripts/check-placeholders.mjs",
+    "check:changelog": "node scripts/changelog.mjs check",
+    "changelog:bump": "node scripts/changelog.mjs bump",
+    "verify": "npm run build && npm run lint:ds && npm run check:agents && npm run check:changelog && npm run check:placeholders"
   },
   "dependencies": {
+    "@sebit/design-tokens": "file:vendor/sebit/sebit-design-tokens-6.0.0-alpha.3.tgz",
+    "@sebit/react": "file:vendor/sebit/sebit-react-6.0.0-alpha.3.tgz",
     "astro": "5.18.2"
   },
   "engines": {

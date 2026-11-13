@@ -45,13 +45,13 @@ import { company, needs, sla, contactEndpoint } from '../data/site';
             <Icon name="i-alert" />
             <p>Poptávku se nepodařilo odeslat. Zkuste to prosím znovu za chvíli, nebo nám ji pošlete e-mailem: <a id="brief-mailto" href={`mailto:${company.email}`}>otevřít předvyplněný e-mail</a>.</p>
           </div>
-          <div><button class="kit-btn kit-btn--primary kit-btn--lg" type="submit" id="brief-send"><span>Odeslat poptávku</span> <Icon name="i-arrow-right" /></button></div>
+          <div><button class="sb-button sb-button--primary sb-button--lg" type="submit" id="brief-send"><span>Odeslat poptávku</span> <Icon name="i-arrow-right" /></button></div>
         </form>
         <div class="w-success" id="brief-ok" hidden tabindex="-1" role="status">
           <Icon name="i-check-circle" />
           <h2 class="w-h3">Děkujeme, poptávka dorazila.</h2>
           <p>Přečte ji člověk a ozveme se {sla.standard}, v praxi obvykle dřív. Odpovíme na e-mail <b id="brief-ok-mail"></b>. Spěcháte? Zavolejte na <a href={`tel:${company.phoneHref}`}>{company.phone}</a>.</p>
-          <div><button class="kit-btn kit-btn--ghost" type="button" id="brief-reset">Poslat další poptávku</button></div>
+          <div><button class="sb-button sb-button--ghost" type="button" id="brief-reset">Poslat další poptávku</button></div>
         </div>
       </div>
       <aside class="w-aside w-sticky" aria-label="Přímý kontakt">
